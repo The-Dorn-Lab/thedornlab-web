@@ -26,6 +26,8 @@ File names are case-sensitive on the live site: `Headshot.JPG` and `headshot.jpg
 - **News and publications** are read by the page in the visitor's browser, straight from `assets/news.txt` and `assets/publications/`. A change is live as soon as the workflow has republished.
 - **The Group page** is written by `build_team.py`, which the workflow runs on every deployment (`.github/workflows/deploy.yml`). It reads the bios, rewrites `thegroup.html`, writes `assets/publications/group_members.txt` (the names set in bold on the Publications page) and makes the web-sized copies of headshots and group photos in the two `web/` folders.
 
+- **Search engines** get a `sitemap.xml` and `robots.txt`, written by `build_sitemap.py` on every deployment. A new page is listed automatically. Each page's description for search results is the `<meta name="description">` line near the top of its `.html` file.
+
 If a deployment fails, open the failed run under the repository's **Actions** tab and read its log: `build_team.py` stops with a plain message when a bio has a problem, for example a headshot file name that does not exist.
 
 ## Working on the site locally
