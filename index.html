@@ -6,6 +6,15 @@
 <title>Dorn Lab — Synthetic Methodology &amp; Heterocyclic Design · University of Vermont</title>
 <meta name="description" content="The Dorn Lab at the University of Vermont: organic methodology development and synthesis toward boron- and nitrogen-containing molecules.">
 <link rel="canonical" href="https://thedornlab.com/">
+<script>
+// Keep the address bar clean: /research.html shows as /research, /index.html as /.
+(function () {
+  var l = location, p = l.pathname;
+  if (l.protocol === 'file:') return;
+  var q = p.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '');
+  if (q !== p) history.replaceState(null, '', q + l.search + l.hash);
+})();
+</script>
 <link rel="icon" href="assets/dornlab_icon_outlined_thick.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -309,7 +318,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="brandmark" aria-label="The Dorn Lab — home">
+    <a href="./" class="brandmark" aria-label="The Dorn Lab — home">
       <img src="assets/dornlab_icon_outlined_thick.svg" alt="">
       <span>
         <span class="brandmark-the">The</span>
@@ -318,15 +327,15 @@ main > section:last-of-type{padding-bottom:var(--s2);}
     </a>
 
     <nav class="hidden xl:flex items-center gap-7 ml-auto mr-1" aria-label="Primary">
-      <a class="navlink" href="research.html">Research</a>
-      <a class="navlink" href="publications.html">Publications</a>
-      <a class="navlink" href="thegroup.html">The Group</a>
-      <!-- hidden for now: <a class="navlink" href="news.html">News &amp; Updates</a> -->
-      <a class="navlink" href="resources.html">Resources</a>
+      <a class="navlink" href="research">Research</a>
+      <a class="navlink" href="publications">Publications</a>
+      <a class="navlink" href="thegroup">The Group</a>
+      <!-- hidden for now: <a class="navlink" href="news">News &amp; Updates</a> -->
+      <a class="navlink" href="resources">Resources</a>
     </nav>
 
     <div class="flex items-center gap-[var(--s3)]">
-      <a href="contact.html" class="btn btn-gold hidden sm:inline-flex">Contact</a>
+      <a href="contact" class="btn btn-gold hidden sm:inline-flex">Contact</a>
       <button type="button" class="menu-btn xl:hidden" id="menu-btn"
               aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -336,12 +345,12 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 
   <div class="menu-panel xl:hidden" id="menu-panel">
     <nav class="wrap py-[var(--s2)]" aria-label="Primary — mobile">
-      <a href="research.html">Research</a>
-      <a href="publications.html">Publications</a>
-      <a href="thegroup.html">The Group</a>
-      <!-- hidden for now: <a href="news.html">News &amp; Updates</a> -->
-      <a href="resources.html">Resources</a>
-      <a href="contact.html" style="border-bottom:0;color:var(--mill)">Contact</a>
+      <a href="research">Research</a>
+      <a href="publications">Publications</a>
+      <a href="thegroup">The Group</a>
+      <!-- hidden for now: <a href="news">News &amp; Updates</a> -->
+      <a href="resources">Resources</a>
+      <a href="contact" style="border-bottom:0;color:var(--mill)">Contact</a>
     </nav>
   </div>
 </header>
@@ -369,8 +378,8 @@ main > section:last-of-type{padding-bottom:var(--s2);}
           nitrogen-containing molecules.
         </p>
         <div class="mt-[var(--s5)] flex flex-wrap gap-[var(--s3)]">
-          <a href="research.html" class="btn btn-gold">Read the research</a>
-          <a href="contact.html" class="btn btn-ghost">Get involved</a>
+          <a href="research" class="btn btn-gold">Read the research</a>
+          <a href="contact" class="btn btn-ghost">Get involved</a>
         </div>
       </div>
     </div>
@@ -404,7 +413,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
           Latest from the lab
         </h2>
       </div>
-      <a href="news.html" class="arrowlink reveal">
+      <a href="news" class="arrowlink reveal">
         All updates
         <svg width="17" height="11" viewBox="0 0 17 11" fill="none" aria-hidden="true">
           <path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -426,7 +435,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 <footer class="footer-light" style="background:#fff;color:var(--ink)">
   <div class="wrap py-[var(--s8)]">
     <div class="flex flex-col items-start gap-[var(--s6)] md:flex-row md:items-center md:justify-between">
-      <a href="index.html" class="footlogo" aria-label="The Dorn Lab — home">
+      <a href="./" class="footlogo" aria-label="The Dorn Lab — home">
         <img src="assets/dornlab_logo.svg" alt="" class="block h-[88px] md:h-[clamp(88px,11.1vw,128px)] w-auto">
       </a>
       <!-- UVM unit logo: horizontal lockup, Catamount Green (UVM Unit Logo Guidelines 2.1-2.2); see assets/uvm_chemistry_logo.svg -->

@@ -53,7 +53,7 @@ def main():
     pages.sort(key=lambda p: (p != 'index.html', p))            # the landing page first
     rows = []
     for page in pages:
-        loc = base + '/' + ('' if page == 'index.html' else page)
+        loc = base + '/' + ('' if page == 'index.html' else page[:-len('.html')])     # /research, not /research.html
         when = last_changed([page] + FED_BY.get(page, []))
         rows.append('  <url>\n    <loc>' + escape(loc) + '</loc>\n' +
                     ('    <lastmod>' + when + '</lastmod>\n' if when else '') + '  </url>')

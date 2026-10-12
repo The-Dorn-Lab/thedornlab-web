@@ -30,6 +30,8 @@ http
   .createServer((req, res) => {
     let urlPath = decodeURIComponent(req.url.split('?')[0]);
     if (urlPath.endsWith('/')) urlPath += 'index.html';
+    // pages are linked without their ending (/research), the way the live host serves them
+    else if (!path.extname(urlPath) && fs.existsSync(path.join(ROOT, urlPath + '.html'))) urlPath += '.html';
 
     const filePath = path.join(ROOT, urlPath);
     if (!filePath.startsWith(ROOT)) {

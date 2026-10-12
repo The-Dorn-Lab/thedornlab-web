@@ -364,7 +364,7 @@ def drawer(d, shot):
 
 
 def empty(kind):
-    body = ('Recruiting &mdash; <a class="advisorlink" href="contact.html#openings">see open positions</a>'
+    body = ('Recruiting &mdash; <a class="advisorlink" href="contact#openings">see open positions</a>'
             if kind == 'recruiting' else 'Coming soon')
     return '    <p class="team-empty reveal mt-[var(--s5)] datum" style="color:var(--ink-faint)">' + body + '</p>' + NL
 

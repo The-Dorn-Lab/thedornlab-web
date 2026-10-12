@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Group — Dorn Lab</title>
 <meta name="description" content="Meet the Dorn Lab at the University of Vermont: Prof. Stanna Dorn and the group's postdoctoral, graduate and undergraduate researchers.">
-<link rel="canonical" href="https://thedornlab.com/thegroup.html">
+<link rel="canonical" href="https://thedornlab.com/thegroup">
+<script>
+// Keep the address bar clean: /research.html shows as /research, /index.html as /.
+(function () {
+  var l = location, p = l.pathname;
+  if (l.protocol === 'file:') return;
+  var q = p.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '');
+  if (q !== p) history.replaceState(null, '', q + l.search + l.hash);
+})();
+</script>
 <link rel="icon" href="assets/dornlab_icon_outlined_thick.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -358,7 +367,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 <!-- ══════════════════════════ NAV ══════════════════════════ -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="brandmark" aria-label="The Dorn Lab — home">
+    <a href="./" class="brandmark" aria-label="The Dorn Lab — home">
       <img src="assets/dornlab_icon_outlined_thick.svg" alt="">
       <span>
         <span class="brandmark-the">The</span>
@@ -367,15 +376,15 @@ main > section:last-of-type{padding-bottom:var(--s2);}
     </a>
 
     <nav class="hidden xl:flex items-center gap-7 ml-auto mr-1" aria-label="Primary">
-      <a class="navlink" href="research.html">Research</a>
-      <a class="navlink" href="publications.html">Publications</a>
-      <a class="navlink is-active" href="thegroup.html" aria-current="page">The Group</a>
-      <!-- hidden for now: <a class="navlink" href="news.html">News &amp; Updates</a> -->
-      <a class="navlink" href="resources.html">Resources</a>
+      <a class="navlink" href="research">Research</a>
+      <a class="navlink" href="publications">Publications</a>
+      <a class="navlink is-active" href="thegroup" aria-current="page">The Group</a>
+      <!-- hidden for now: <a class="navlink" href="news">News &amp; Updates</a> -->
+      <a class="navlink" href="resources">Resources</a>
     </nav>
 
     <div class="flex items-center gap-[var(--s3)]">
-      <a href="contact.html" class="btn btn-gold hidden sm:inline-flex">Contact</a>
+      <a href="contact" class="btn btn-gold hidden sm:inline-flex">Contact</a>
       <button type="button" class="menu-btn xl:hidden" id="menu-btn"
               aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -385,12 +394,12 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 
   <div class="menu-panel xl:hidden" id="menu-panel">
     <nav class="wrap py-[var(--s2)]" aria-label="Primary — mobile">
-      <a href="research.html">Research</a>
-      <a href="publications.html">Publications</a>
-      <a href="thegroup.html" aria-current="page">The Group</a>
-      <!-- hidden for now: <a href="news.html">News &amp; Updates</a> -->
-      <a href="resources.html">Resources</a>
-      <a href="contact.html" style="border-bottom:0;color:var(--mill)">Contact</a>
+      <a href="research">Research</a>
+      <a href="publications">Publications</a>
+      <a href="thegroup" aria-current="page">The Group</a>
+      <!-- hidden for now: <a href="news">News &amp; Updates</a> -->
+      <a href="resources">Resources</a>
+      <a href="contact" style="border-bottom:0;color:var(--mill)">Contact</a>
     </nav>
   </div>
 </header>
@@ -528,7 +537,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
     <h3 id="team-graduate-students" class="reveal mt-[var(--s8)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
       Graduate Students
     </h3>
-    <p class="team-empty reveal mt-[var(--s5)] datum" style="color:var(--ink-faint)">Recruiting &mdash; <a class="advisorlink" href="contact.html#openings">see open positions</a></p>
+    <p class="team-empty reveal mt-[var(--s5)] datum" style="color:var(--ink-faint)">Recruiting &mdash; <a class="advisorlink" href="contact#openings">see open positions</a></p>
 
     <h3 id="team-undergraduate-students" class="reveal mt-[var(--s8)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
       Undergraduate Students
@@ -729,7 +738,7 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 <footer class="footer-light" style="background:#fff;color:var(--ink)">
   <div class="wrap py-[var(--s8)]">
     <div class="flex flex-col items-start gap-[var(--s6)] md:flex-row md:items-center md:justify-between">
-      <a href="index.html" class="footlogo" aria-label="The Dorn Lab — home">
+      <a href="./" class="footlogo" aria-label="The Dorn Lab — home">
         <img src="assets/dornlab_logo.svg" alt="" class="block h-[88px] md:h-[clamp(88px,11.1vw,128px)] w-auto">
       </a>
       <!-- UVM unit logo: horizontal lockup, Catamount Green (UVM Unit Logo Guidelines 2.1-2.2); see assets/uvm_chemistry_logo.svg -->
