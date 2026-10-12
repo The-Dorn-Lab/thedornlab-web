@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research — Dorn Lab</title>
+<meta name="description" content="The Dorn Lab at the University of Vermont develops catalytic methods that turn strained rings and heterocycles into bacterial natural products and medicinal chemistry building blocks.">
+<link rel="icon" href="assets/dornlab_icon_outlined_thick.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        catamount: '#154734',
+        gold:      '#FFD100',
+        slate:     '#00313C',
+        fog:       '#F7F7F7',
+        mill:      '#DC582A',
+        forest:    '#061B14',
+        mint:      '#8FCFAF',
+        bone:      '#F4F6F3',
+      },
+      fontFamily: {
+        display: ['Lora', 'Georgia', 'serif'],
+        sans:    ['Roboto', 'system-ui', 'sans-serif'],
+        cond:    ['"Roboto Condensed"', 'Roboto', 'sans-serif'],
+        mono:    ['"Roboto Mono"', 'ui-monospace', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+/* ------------------------------------------------------------------ *
+   Dorn Lab — tokens
+   Palette is UVM's, verbatim: Catamount Green, Gold, Vermont Slate,
+   Morning Fog, Old Mill. Forest + mint are derivations used only where
+   the brand palette needs a darker ground or a legible tint on it.
+ * ------------------------------------------------------------------ */
+:root{
+  --catamount:#154734;
+  --gold:#FFD100;
+  --slate:#00313C;
+  --fog:#F7F7F7;
+  --mill:#DC582A;
+  --forest:#061B14;
+  --mint:#8FCFAF;
+  --bone:#F4F6F3;
+
+  --ink:#202C27;
+  --ink-soft:#57665F;
+  --ink-faint:#8A9791;
+  --rule:#E3E7E4;
+  --rule-dark:rgba(143,207,175,.20);
+
+  /* spacing scale — every gap on the page comes from this set */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* layered, green-tinted elevation — base / elevated / floating */
+  --e1:0 1px 2px rgba(21,71,52,.05), 0 2px 6px rgba(0,49,60,.04);
+  --e2:0 1px 0 rgba(255,255,255,.7) inset, 0 2px 4px rgba(21,71,52,.05), 0 10px 26px rgba(0,49,60,.07);
+  --e3:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 18px rgba(21,71,52,.08), 0 26px 58px rgba(0,49,60,.13);
+
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:88px;}
+body{
+  background:var(--fog);
+  color:var(--ink);
+  font-family:'Roboto',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- type roles ---------- */
+.display{font-family:'Lora',Georgia,serif;letter-spacing:-.03em;line-height:1.04;font-weight:600;}
+.display-sm{font-family:'Lora',Georgia,serif;letter-spacing:-.02em;line-height:1.18;font-weight:600;}
+.eyebrow{
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;line-height:1;
+}
+.tag{
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1;
+}
+.datum{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;}
+/* Centred column. Measured at a 1440 viewport the edge-to-text inset was
+   168px (120 gutter + 48 padding); 1250px brings that to 143px — 15% less. */
+.wrap{width:100%;max-width:1250px;margin:0 auto;padding-left:var(--s5);padding-right:var(--s5);}
+.section{padding-top:var(--s9);padding-bottom:var(--s9);}
+@media (min-width:768px){
+  .wrap{padding-left:var(--s7);padding-right:var(--s7);}
+  .section{padding-top:var(--s10);padding-bottom:var(--s10);}
+}
+
+/* the hexagon eyebrow marker, lifted from the logo mark */
+.hexmark{width:9px;height:10px;flex:none;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  background:var(--gold);}
+
+/* ---------- texture ---------- */
+.grain{position:relative;}
+.grain::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+.lattice::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><g fill='none' stroke='%238FCFAF' stroke-width='1.1'><path d='M28 0.5 L55.5 16.7 L55.5 48.5 L28 64.7 L0.5 48.5 L0.5 16.7 Z'/><path d='M28 64.7 L28 96.5'/></g></svg>");
+}
+
+/* ---------- dark ground ---------- */
+.ground-dark{
+  position:relative;isolation:isolate;color:var(--bone);
+  background:
+    radial-gradient(900px 520px at 12% -8%, rgba(143,207,175,.16), transparent 62%),
+    radial-gradient(760px 460px at 88% 8%, rgba(0,49,60,.85), transparent 65%),
+    radial-gradient(680px 520px at 62% 108%, rgba(255,209,0,.11), transparent 60%),
+    linear-gradient(168deg, #0A2419 0%, var(--forest) 38%, #04241F 74%, var(--slate) 100%);
+}
+/* The bar is a frosted pane: it lets the hue of whatever sits behind it
+   come through, but brightness() lifts a dark backdrop before the
+   translucent fog goes over it, so the green text never loses contrast. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background-color:rgba(247,247,247,.72);
+  -webkit-backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  border-bottom:1px solid var(--rule);
+  transform:translateY(0);will-change:transform;
+  transition:transform .45s var(--ease), box-shadow .35s var(--ease);}
+.nav.stuck{box-shadow:0 1px 24px rgba(0,49,60,.07);}
+/* without backdrop-filter there is nothing to lift a dark backdrop,
+   so fall back to a near-opaque bar rather than unreadable text */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav{background-color:rgba(247,247,247,.96);}
+}
+/* tucked away past the hero; slides back on hover near the top edge */
+.nav.tucked{transform:translateY(-100%);}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:var(--s5);}
+/* icon + name lockup: hexagonal mark beside the lab name, after the
+   reference sites' headers */
+.brandmark{display:inline-flex;align-items:center;gap:13px;flex:none;
+  transition:transform .25s var(--ease);}
+.brandmark:hover{transform:translateY(-1px);}
+.brandmark:active{transform:translateY(1px);}
+.brandmark:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:3px;}
+.brandmark img{height:44px;width:auto;display:block;flex:none;}
+.brandmark-the{display:block;margin-bottom:4px;
+  font-family:'Roboto',system-ui,sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--catamount);line-height:1;}
+.brandmark-name{display:block;font-family:'Roboto',system-ui,sans-serif;font-weight:700;
+  font-size:24px;letter-spacing:-.02em;line-height:1;color:var(--catamount);
+  white-space:nowrap;}
+
+.navlink{position:relative;font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:13.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--catamount);padding:10px 2px;
+  transition:color .25s var(--ease), opacity .25s var(--ease);}
+.navlink::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
+.navlink:hover::after,.navlink:focus-visible::after{transform:scaleX(1);}
+.navlink:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.navlink:active{transform:translateY(1px);}
+
+/* ---------- mobile menu ---------- */
+.menu-btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:44px;height:44px;border-radius:3px;flex:none;
+  transition:transform .25s var(--ease), background-color .25s var(--ease);}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--catamount);
+  transition:transform .3s var(--ease), opacity .25s var(--ease);}
+.menu-btn:hover{background:rgba(21,71,52,.07);}
+.menu-btn:focus-visible{outline:2px solid var(--catamount);outline-offset:2px;}
+.menu-btn:active{transform:scale(.94);}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.menu-panel{position:fixed;top:76px;left:0;right:0;z-index:59;
+  background:var(--fog);
+  border-bottom:1px solid var(--rule);box-shadow:0 20px 44px rgba(0,49,60,.12);
+  opacity:0;transform:translateY(-10px);visibility:hidden;
+  transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s var(--ease);}
+.menu-panel.open{opacity:1;transform:translateY(0);visibility:visible;}
+.menu-panel a{display:block;padding:15px 0;border-bottom:1px solid var(--rule);color:var(--catamount);
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:16px;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:transform .25s var(--ease), color .25s var(--ease);}
+.menu-panel a:hover{transform:translateX(6px);}
+.menu-panel a:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;}
+.menu-panel a:active{transform:translateX(6px) scale(.99);}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:3px;
+  font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:15px 26px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease),
+             background-color .28s var(--ease), border-color .28s var(--ease), color .28s var(--ease);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.btn:active{transform:translateY(1px) scale(.995);}
+
+.btn-gold{background:var(--gold);color:var(--catamount);
+  box-shadow:0 1px 2px rgba(0,49,60,.24), 0 6px 14px rgba(0,49,60,.16);}
+.btn-gold:hover{transform:translateY(-2px);
+  box-shadow:0 3px 6px rgba(0,49,60,.26), 0 12px 26px rgba(0,49,60,.22), 0 0 0 1px rgba(255,209,0,.5);}
+
+/* ---------- scheme ---------- */
+.scheme-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+.scheme-scroll svg,.scheme-scroll img{min-width:760px;width:100%;height:auto;display:block;}
+
+/* ---------- cards ---------- */
+
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--rule);
+  border-radius:999px;padding:9px 16px;color:var(--ink-soft);box-shadow:var(--e1);
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;
+  transition:transform .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), box-shadow .3s var(--ease);}
+.chip::before{content:"";width:6px;height:7px;flex:none;background:var(--catamount);
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  transition:background-color .3s var(--ease);}
+.chip:hover{transform:translateY(-3px);border-color:var(--catamount);color:var(--catamount);box-shadow:var(--e2);}
+.chip:hover::before{background:var(--gold);}
+
+/* ---------- closing band ---------- */
+.band{position:relative;overflow:hidden;isolation:isolate;}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;}
+.band img{filter:grayscale(1) contrast(1.05) blur(2px);transform:scale(1.03);}
+/* colophon: the (c) scaled to the cap height of the text beside it */
+.copy-mark{font-size:1.32em;line-height:0;}
+.colophon-link{color:inherit;text-decoration:none;border-bottom:1px solid transparent;
+  transition:color .25s var(--ease), border-color .25s var(--ease);}
+.colophon-link:hover{color:var(--catamount);border-color:var(--catamount);}
+.colophon-link:active{color:var(--catamount);border-color:var(--catamount);opacity:.75;}
+.colophon-link:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.colophon-sep{padding:0 .55em;opacity:.65;}
+/* the footer carries its own top padding - the last section doesn't need a full bottom pad too */
+main > section:last-of-type{padding-bottom:var(--s2);}
+.footlogo{display:inline-block;max-width:100%;border-radius:2px;transition:transform .35s var(--ease);}
+.footlogo:hover{transform:translateY(-2px);}
+.footlogo:active{transform:translateY(0);}
+.footlogo:focus-visible{outline:2px solid var(--catamount);outline-offset:8px;}
+
+/* ---------- motion ---------- */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.enter{opacity:0;animation:rise .95s var(--ease) forwards;}
+.enter-fade{opacity:0;animation:fadein 1.1s var(--ease) forwards;}
+.d1{animation-delay:.05s}.d3{animation-delay:.27s}
+.d4{animation-delay:.38s}.d6{animation-delay:.66s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;
+    transition-duration:.001ms!important;}
+  .reveal{opacity:1;transform:none;}
+  .enter,.enter-fade{opacity:1;}
+}
+
+/* inner-page title band */
+.pagehead{padding-top:calc(76px + var(--s7));padding-bottom:var(--s7);}
+@media (min-width:768px){
+  .pagehead{padding-top:calc(76px + var(--s8));padding-bottom:var(--s8);}
+}
+
+/* current page in the nav */
+.navlink.is-active{color:var(--catamount);}
+.navlink.is-active::after{transform:scaleX(1);}
+
+::selection{background:var(--gold);color:var(--catamount);}
+</style>
+</head>
+
+<body class="antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:z-[80] focus:top-3 focus:left-3 focus:bg-gold focus:text-catamount focus:px-4 focus:py-2 focus:rounded-sm tag">Skip to content</a>
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brandmark" aria-label="The Dorn Lab — home">
+      <img src="assets/dornlab_icon_outlined_thick.svg" alt="">
+      <span>
+        <span class="brandmark-the">The</span>
+        <span class="brandmark-name">Dorn Lab</span>
+      </span>
+    </a>
+
+    <nav class="hidden xl:flex items-center gap-7 ml-auto mr-1" aria-label="Primary">
+      <a class="navlink is-active" href="research.html" aria-current="page">Research</a>
+      <a class="navlink" href="publications.html">Publications</a>
+      <a class="navlink" href="thegroup.html">The Group</a>
+      <!-- hidden for now: <a class="navlink" href="news.html">News &amp; Updates</a> -->
+      <a class="navlink" href="resources.html">Resources</a>
+    </nav>
+
+    <div class="flex items-center gap-[var(--s3)]">
+      <a href="contact.html" class="btn btn-gold hidden sm:inline-flex">Contact</a>
+      <button type="button" class="menu-btn xl:hidden" id="menu-btn"
+              aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-panel xl:hidden" id="menu-panel">
+    <nav class="wrap py-[var(--s2)]" aria-label="Primary — mobile">
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="thegroup.html">The Group</a>
+      <!-- hidden for now: <a href="news.html">News &amp; Updates</a> -->
+      <a href="resources.html">Resources</a>
+      <a href="contact.html" style="border-bottom:0;color:var(--mill)">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════════════ PAGE HEAD ══════════════════════════ -->
+<section class="ground-dark grain lattice overflow-hidden">
+  <div class="wrap pagehead relative z-10" style="padding-bottom:var(--s5)">
+    <h1 class="display enter d1 max-w-[20ch] text-[clamp(2.5rem,5.6vw,4.2rem)]">Research</h1>
+  </div>
+
+  <!-- stays inside the same section: .ground-dark paints its gradients per element,
+       so a second dark section would restart them and seam at the join -->
+  <div class="wrap relative z-10 flex flex-col gap-[var(--s6)] pb-[var(--s9)]">
+    <p class="enter-fade d3 text-[18px] leading-[1.66]"
+       style="color:rgba(244,246,243,.8)">
+      Research in the Dorn lab is focused on innovations in organic/organometallic
+      methodology that provide new paradigms for the construction of boron- and
+      nitrogen-containing molecules, with an eye towards translational applications.
+      In particular, we will pursue novel reagent design, adapting traditional
+      mechanistic paradigms for the modern era, and the development and synthesis of
+      molecules that can interface with biology/medicinal chemistry disciplines. As
+      part of these efforts, researchers in the Dorn lab will gain and deepen their
+      expertise in organic methodology/synthesis, from mechanistic evaluation and
+      organometallic synthesis to strategic synthetic planning and interdisciplinary
+      applications.
+    </p>
+
+    <!-- ░░ signature: the retrosynthetic disconnection ░░ -->
+    <figure class="enter-fade d4">
+      <figcaption class="datum flex flex-wrap items-center gap-x-[var(--s4)] gap-y-2 pb-[var(--s4)] mb-[var(--s5)] border-b"
+                  style="border-color:var(--rule-dark);color:rgba(244,246,243,.46)">
+        <span style="color:var(--gold)">Scheme 1</span>
+        <span>The lab's approach.</span>
+      </figcaption>
+
+      <div class="scheme-scroll pb-2">
+        <!-- already recoloured for the dark band; the source files are in assets/research_schemes/scheme1/ -->
+        <img src="assets/research_schemes/scheme1.svg" width="1334" height="253"
+             alt="Scheme: reaction development plus catalysis leads to boron- and nitrogen-containing molecules, and on to natural products and biological applications.">
+      </div>
+    </figure>
+
+    <!-- program strip -->
+    <div class="grid gap-[var(--s5)] sm:grid-cols-3 border-t pt-[var(--s5)] enter-fade d6"
+         style="border-color:var(--rule-dark)">
+      <div>
+        <p class="tag" style="color:var(--gold)">01 · Methods</p>
+        <p class="mt-2 text-[15px] leading-[1.6]" style="color:rgba(244,246,243,.72)">Reagent design, reaction development, mechanistic evaluation.</p>
+      </div>
+      <div>
+        <p class="tag" style="color:var(--gold)">02 · Synthesis</p>
+        <p class="mt-2 text-[15px] leading-[1.6]" style="color:rgba(244,246,243,.72)">Strategic planning, efficient routes, innovative disconnections.</p>
+      </div>
+      <div>
+        <p class="tag" style="color:var(--gold)">03 · Applications</p>
+        <p class="mt-2 text-[15px] leading-[1.6]" style="color:rgba(244,246,243,.72)">Interdisciplinary collaborations, biological systems, medicinal chemistry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- "What we're excited about" is benched for now: remove the word "hidden" below to bring it back -->
+<section id="interests" hidden class="section" style="background:#fff;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+  <div class="wrap">
+    <p class="eyebrow reveal flex items-center gap-3" style="color:var(--catamount)">
+      <span class="hexmark"></span> What we're excited about
+    </p>
+    <h2 class="display-sm reveal mt-[var(--s5)] max-w-[20ch] text-[clamp(2.1rem,4.4vw,3.2rem)]" style="color:var(--catamount)">
+      If any of this is your kind of problem, talk to us.
+    </h2>
+
+    <div class="mt-[var(--s8)] grid gap-[var(--s8)] md:grid-cols-2 md:gap-[var(--s9)]">
+      <div class="reveal">
+        <div class="flex items-center gap-[var(--s3)] pb-[var(--s3)] border-b" style="border-color:var(--rule)">
+          <span class="datum" style="color:var(--ink-faint)">A</span>
+          <h3 class="display-sm text-[19px]" style="color:var(--catamount)">Making bonds</h3>
+        </div>
+        <div class="mt-[var(--s5)] flex flex-wrap gap-[var(--s2)]">
+          <span class="chip">Strain-release chemistry</span>
+          <span class="chip">Cooperative Cu/Pd catalysis</span>
+          <span class="chip">Alkene carboboration</span>
+          <span class="chip">Ligand design</span>
+          <span class="chip">Enantioselective methods</span>
+          <span class="chip">C–H functionalization</span>
+          <span class="chip">Photoredox</span>
+          <span class="chip">Mechanistic study</span>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="flex items-center gap-[var(--s3)] pb-[var(--s3)] border-b" style="border-color:var(--rule)">
+          <span class="datum" style="color:var(--ink-faint)">B</span>
+          <h3 class="display-sm text-[19px]" style="color:var(--catamount)">Making molecules</h3>
+        </div>
+        <div class="mt-[var(--s5)] flex flex-wrap gap-[var(--s2)]">
+          <span class="chip">Bacterial metabolites</span>
+          <span class="chip">Polycyclic scaffolds</span>
+          <span class="chip">Saturated heterocycles</span>
+          <span class="chip">Antibiotic resistance</span>
+          <span class="chip">Med-chem building blocks</span>
+          <span class="chip">Scalable routes</span>
+          <span class="chip">Structure–activity</span>
+          <span class="chip">Natural product isolation</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="reveal mt-[var(--s8)] max-w-[62ch] text-[16px] leading-[1.72]" style="color:var(--ink-soft)">
+      Nobody arrives knowing all of it. If two or three of these pull at you, that's enough to
+      start a conversation — the rest you'll pick up at the bench.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer-light" style="background:#fff;color:var(--ink)">
+  <div class="wrap py-[var(--s8)]">
+    <div class="flex flex-col items-start gap-[var(--s6)] md:flex-row md:items-center md:justify-between">
+      <a href="index.html" class="footlogo" aria-label="The Dorn Lab — home">
+        <img src="assets/dornlab_logo.svg" alt="" class="block h-[88px] md:h-[clamp(88px,11.1vw,128px)] w-auto">
+      </a>
+      <!-- UVM unit logo: horizontal lockup, Catamount Green (UVM Unit Logo Guidelines 2.1-2.2); see assets/uvm_chemistry_logo.svg -->
+      <a href="https://www.uvm.edu/cas/chemistry" class="footlogo">
+        <img src="assets/uvm_chemistry_logo.svg" alt="University of Vermont, College of Arts and Sciences, Department of Chemistry"
+             class="block w-full max-w-[306px] h-auto md:h-[clamp(42.8px,5.39vw,62.2px)] md:w-auto md:max-w-none">
+      </a>
+    </div>
+
+    <div class="mt-[var(--s8)] pt-[var(--s5)] border-t flex flex-wrap items-center justify-between gap-[var(--s4)]"
+         style="border-color:var(--rule)">
+      <p class="datum" style="color:var(--ink-faint)"><span class="copy-mark">©</span> 2026 Dorn Lab</p>
+      <p class="datum" style="color:var(--ink-faint)"><a class="colophon-link" href="https://www.uvm.edu/accessibility-services/digital-accessibility-compliance-uvm">Accessibility</a><span class="colophon-sep" aria-hidden="true">·</span><a class="colophon-link" href="https://www.uvm.edu/compliance/website-privacy-policy/terms-use">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// sticky nav state — also forced while the mobile menu is open, so the
+// bar stays legible when the panel sits over the dark hero
+const nav = document.getElementById('nav');
+const menuBtn = document.getElementById('menu-btn');
+const menuPanel = document.getElementById('menu-panel');
+
+// The bar sits out at the top of the page, tucks away once you have
+// scrolled past the hero, and slides back when the cursor comes near the
+// top edge — retreating again a couple of seconds after it leaves.
+const TUCK_AFTER = 260;    // px scrolled before the bar may tuck away
+const HOVER_BAND = 96;     // px from the top edge that counts as "at the header"
+const LINGER     = 1100;   // ms the cursor must be away before it tucks again
+
+let menuOpen = false, pointerUp = false, navFocused = false, awayTimer = null;
+// hover is the pointer route back; scrolling up brings it back on any device
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let lastY = window.scrollY, scrolledUp = false;
+
+const render = () => {
+  const scrolled = window.scrollY > TUCK_AFTER;
+  const out = !scrolled || pointerUp || navFocused || menuOpen || scrolledUp;
+  nav.classList.toggle('tucked', !out);
+  nav.classList.toggle('stuck', window.scrollY > 40 || menuOpen);
+};
+
+const onScroll = () => {
+  const y = window.scrollY;
+  if (y < lastY - 4) scrolledUp = true;
+  else if (y > lastY + 4) scrolledUp = false;
+  lastY = y;
+  render();
+};
+
+if (canHover) {
+  window.addEventListener('mousemove', (e) => {
+    if (e.clientY <= HOVER_BAND) {
+      clearTimeout(awayTimer); awayTimer = null;
+      if (!pointerUp) { pointerUp = true; render(); }
+    } else if (pointerUp && !awayTimer) {
+      awayTimer = setTimeout(() => {
+        awayTimer = null; pointerUp = false; render();
+      }, LINGER);
+    }
+  }, { passive: true });
+  // cursor leaving the window entirely counts as leaving the header
+  document.addEventListener('mouseleave', () => {
+    if (!pointerUp) return;
+    clearTimeout(awayTimer);
+    awayTimer = setTimeout(() => { awayTimer = null; pointerUp = false; render(); }, LINGER);
+  });
+}
+
+// keyboard users must never be tabbing into a bar they cannot see
+nav.addEventListener('focusin',  () => { navFocused = true;  render(); });
+nav.addEventListener('focusout', () => { navFocused = false; render(); });
+
+const setMenu = (open) => {
+  menuOpen = open;
+  menuPanel.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  render();
+};
+
+menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+menuPanel.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menuOpen) { setMenu(false); menuBtn.focus(); }
+});
+window.addEventListener('resize', () => { if (menuOpen && window.innerWidth >= 1280) setMenu(false); });
+
+render();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// scroll reveals — a deterministic sweep, so nothing can be scrolled past
+// while still invisible (fast scrolls and anchor jumps used to skip elements)
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pending = [...document.querySelectorAll('.reveal')];
+
+if (reduce) {
+  pending.forEach((el) => el.classList.add('in'));
+  pending = [];
+} else {
+  let queued = false;
+  const sweep = () => {
+    queued = false;
+    const line = window.innerHeight * 0.92;
+    let shown = 0;
+    pending = pending.filter((el) => {
+      if (el.getBoundingClientRect().top > line) return true;
+      el.style.transitionDelay = shown++ * 70 + 'ms';
+      el.classList.add('in');
+      return false;
+    });
+    if (!pending.length) {
+      window.removeEventListener('scroll', request);
+      window.removeEventListener('resize', request);
+    }
+  };
+  const request = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sweep);
+  };
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  sweep();
+}
+</script>
+</body>
+</html>

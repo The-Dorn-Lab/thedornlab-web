@@ -1,0 +1,10 @@
+# Group members, current and former - one name per line.
+# The Publications page sets these people in bold wherever they appear as an author.
+# Written by build_team.py from assets/bios/ and its subfolders: edit the bio files,
+# not this list, which is replaced each time the script runs.
+
+Jake Sirlin
+Science Education Alliance Phage Hunters Advancing Genomics and Evolutionary Science
+Miles Ottinger
+Stanna Dorn
+TJ Walsh

@@ -1,0 +1,17 @@
+# MOCK FILE - delete this file (and assets/headshots/MOCK_Pet_Headshot.jpg), then run python build_team.py
+
+Name:           Ori
+Role:           Lab Mascot
+Joined:         January 2020
+Headshot:       Ori_Headshot.jpeg
+Email:
+Fellowship:     Best Boy Scholar (2020-Present)
+Education:
+Class Year:
+CV:
+ORCID:
+LinkedIn:
+Google Scholar:
+
+Bio:
+Ori is Jake's cat. He was born missing a vertabre, has high levels of anxiety (primarily about his research), and is all around perfect. His hobbies include boxing, hissing at nothing through the window, and yelling at you until you cordially invite him for a cuddle.

@@ -1,0 +1,29 @@
+# Group news for the website.
+#
+# The landing page shows the three most recent entries; the News page (news.html) shows
+# them all. Both read this file each time they load: add an entry, save, refresh - done.
+#
+#   Date:      when it happened - "Aug 2026", "August 31, 2026", "2026-08-31" or just "2024".
+#              Shown as you write it, and used to put the newest first.
+#   Title:     the headline
+#   Content:   a sentence or two. It can run over several lines.
+#   Category:  the small label on the right - Department, Funding, Paper, Award, People...
+#              The newest entry's label is shown as a gold badge; the rest are plain.
+#
+# Start every entry with its Date: line. The order in this file does not matter; when two
+# entries share a date, the one written first is shown first. Lines starting with "#" are notes.
+
+Date: Sept 2026
+Title: Undergraduates Miles and TJ join the Dorn Lab
+Content: We’re excited to welcome UVM undergrads Miles and TJ to the group!
+Category: Group Members
+
+Date: Aug 2026
+Title: Jake joins the lab as a postdoctoral researcher
+Content: We’re excited to welcome Dr. Jake Sirlin from UNC-Chapel Hill to the group!
+Category: Group Members
+
+Date: July 2026
+Title: The Dorn Lab opens at UVM!
+Content: We’re having a blast getting the lab up and starting chemistry!
+Category: Lab Update

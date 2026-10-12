@@ -1,0 +1,37 @@
+# Dorn Lab bio file. Field guide and how to rebuild the page: assets/bios/README.md
+#
+# HOW TO USE: copy this file, rename the copy (e.g. abc_bio.txt), fill it in, then run
+#     python build_team.py
+# from the website folder. Files starting with "_" (like this one) are ignored.
+# Lines starting with "#" are notes and are ignored. Delete them in your copy if you like.
+# Leave a field blank if it doesn't apply.
+#
+# Joined: the date they joined the lab, e.g. "August 31, 2026" or "March 2026".
+#   Each section lists people newest first; anyone without a date goes last.
+#
+# Role must be exactly one of:
+#   Principal Investigator | Postdoctoral Researcher | Graduate Student
+#   Undergraduate Researcher | Lab Mascot
+#
+# Education: one line per degree, advisor in (parentheses) at the end.
+#   The card shows the degree WITHOUT the advisor; the pop-out panel shows both.
+#   Postdocs:  Ph.D. line first, then the predoctoral degree.
+#   Grads:     the predoctoral degree.
+#   Undergrads: leave Education blank and fill in Class Year instead.
+
+Name:
+Role:
+Title:
+Joined:
+Headshot:
+Headshot Focus:
+Email:
+Fellowship:
+Education:
+Class Year:
+CV:
+ORCID:
+LinkedIn:
+Google Scholar:
+
+Bio:

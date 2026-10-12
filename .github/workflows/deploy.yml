@@ -1,0 +1,64 @@
+# Builds the site and publishes it to GitHub Pages every time main changes.
+#
+# The build rebuilds The Group page, the list of group members the Publications page
+# sets in bold, and the web-sized headshots and group photos - so editing a bio or
+# adding a photo here on GitHub is all it takes. News and publications need no build:
+# those pages read their text files in the visitor's browser.
+name: Publish website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you re-run it by hand from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow (resizes the photos)
+        run: pip install --quiet Pillow
+
+      - name: Build The Group page and the web-sized photos
+        run: python build_team.py
+
+      # Only what a visitor's browser needs is published: the pages and assets/,
+      # without the bios' text files and the full-size original photos.
+      - name: Collect the site
+        run: |
+          mkdir _site
+          cp *.html _site/
+          cp -r assets _site/assets
+          rm -rf _site/assets/bios
+          find _site/assets/headshots _site/assets/group_photos -maxdepth 1 -type f -delete
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

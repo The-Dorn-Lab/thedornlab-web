@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Group — Dorn Lab</title>
+<meta name="description" content="The Dorn Lab at the University of Vermont develops catalytic methods that turn strained rings and heterocycles into bacterial natural products and medicinal chemistry building blocks.">
+<link rel="icon" href="assets/dornlab_icon_outlined_thick.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        catamount: '#154734',
+        gold:      '#FFD100',
+        slate:     '#00313C',
+        fog:       '#F7F7F7',
+        mill:      '#DC582A',
+        forest:    '#061B14',
+        mint:      '#8FCFAF',
+        bone:      '#F4F6F3',
+      },
+      fontFamily: {
+        display: ['Lora', 'Georgia', 'serif'],
+        sans:    ['Roboto', 'system-ui', 'sans-serif'],
+        cond:    ['"Roboto Condensed"', 'Roboto', 'sans-serif'],
+        mono:    ['"Roboto Mono"', 'ui-monospace', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+/* ------------------------------------------------------------------ *
+   Dorn Lab — tokens
+   Palette is UVM's, verbatim: Catamount Green, Gold, Vermont Slate,
+   Morning Fog, Old Mill. Forest + mint are derivations used only where
+   the brand palette needs a darker ground or a legible tint on it.
+ * ------------------------------------------------------------------ */
+:root{
+  --catamount:#154734;
+  --gold:#FFD100;
+  --slate:#00313C;
+  --fog:#F7F7F7;
+  --mill:#DC582A;
+  --forest:#061B14;
+  --mint:#8FCFAF;
+  --bone:#F4F6F3;
+
+  --ink:#202C27;
+  --ink-soft:#57665F;
+  --ink-faint:#8A9791;
+  --rule:#E3E7E4;
+  --rule-dark:rgba(143,207,175,.20);
+
+  /* spacing scale — every gap on the page comes from this set */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* layered, green-tinted elevation — base / elevated / floating */
+  --e1:0 1px 2px rgba(21,71,52,.05), 0 2px 6px rgba(0,49,60,.04);
+  --e2:0 1px 0 rgba(255,255,255,.7) inset, 0 2px 4px rgba(21,71,52,.05), 0 10px 26px rgba(0,49,60,.07);
+  --e3:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 18px rgba(21,71,52,.08), 0 26px 58px rgba(0,49,60,.13);
+
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:88px;}
+body{
+  background:var(--fog);
+  color:var(--ink);
+  font-family:'Roboto',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- type roles ---------- */
+.display{font-family:'Lora',Georgia,serif;letter-spacing:-.03em;line-height:1.04;font-weight:600;}
+.display-sm{font-family:'Lora',Georgia,serif;letter-spacing:-.02em;line-height:1.18;font-weight:600;}
+.tag{
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1;
+}
+.datum{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;}
+/* Centred column. Measured at a 1440 viewport the edge-to-text inset was
+   168px (120 gutter + 48 padding); 1250px brings that to 143px — 15% less. */
+.wrap{width:100%;max-width:1250px;margin:0 auto;padding-left:var(--s5);padding-right:var(--s5);}
+.section{padding-top:var(--s9);padding-bottom:var(--s9);}
+@media (min-width:768px){
+  .wrap{padding-left:var(--s7);padding-right:var(--s7);}
+  .section{padding-top:var(--s10);padding-bottom:var(--s10);}
+}
+
+/* ---------- texture ---------- */
+.grain{position:relative;}
+.grain::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+.lattice::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><g fill='none' stroke='%238FCFAF' stroke-width='1.1'><path d='M28 0.5 L55.5 16.7 L55.5 48.5 L28 64.7 L0.5 48.5 L0.5 16.7 Z'/><path d='M28 64.7 L28 96.5'/></g></svg>");
+}
+
+/* ---------- dark ground ---------- */
+.ground-dark{
+  position:relative;isolation:isolate;color:var(--bone);
+  background:
+    radial-gradient(900px 520px at 12% -8%, rgba(143,207,175,.16), transparent 62%),
+    radial-gradient(760px 460px at 88% 8%, rgba(0,49,60,.85), transparent 65%),
+    radial-gradient(680px 520px at 62% 108%, rgba(255,209,0,.11), transparent 60%),
+    linear-gradient(168deg, #0A2419 0%, var(--forest) 38%, #04241F 74%, var(--slate) 100%);
+}
+/* The bar is a frosted pane: it lets the hue of whatever sits behind it
+   come through, but brightness() lifts a dark backdrop before the
+   translucent fog goes over it, so the green text never loses contrast. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background-color:rgba(247,247,247,.72);
+  -webkit-backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  border-bottom:1px solid var(--rule);
+  transform:translateY(0);will-change:transform;
+  transition:transform .45s var(--ease), box-shadow .35s var(--ease);}
+.nav.stuck{box-shadow:0 1px 24px rgba(0,49,60,.07);}
+/* without backdrop-filter there is nothing to lift a dark backdrop,
+   so fall back to a near-opaque bar rather than unreadable text */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav{background-color:rgba(247,247,247,.96);}
+}
+/* tucked away past the hero; slides back on hover near the top edge */
+.nav.tucked{transform:translateY(-100%);}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:var(--s5);}
+/* icon + name lockup: hexagonal mark beside the lab name, after the
+   reference sites' headers */
+.brandmark{display:inline-flex;align-items:center;gap:13px;flex:none;
+  transition:transform .25s var(--ease);}
+.brandmark:hover{transform:translateY(-1px);}
+.brandmark:active{transform:translateY(1px);}
+.brandmark:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:3px;}
+.brandmark img{height:44px;width:auto;display:block;flex:none;}
+.brandmark-the{display:block;margin-bottom:4px;
+  font-family:'Roboto',system-ui,sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--catamount);line-height:1;}
+.brandmark-name{display:block;font-family:'Roboto',system-ui,sans-serif;font-weight:700;
+  font-size:24px;letter-spacing:-.02em;line-height:1;color:var(--catamount);
+  white-space:nowrap;}
+
+.navlink{position:relative;font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:13.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--catamount);padding:10px 2px;
+  transition:color .25s var(--ease), opacity .25s var(--ease);}
+.navlink::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
+.navlink:hover::after,.navlink:focus-visible::after{transform:scaleX(1);}
+.navlink:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.navlink:active{transform:translateY(1px);}
+
+/* ---------- mobile menu ---------- */
+.menu-btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:44px;height:44px;border-radius:3px;flex:none;
+  transition:transform .25s var(--ease), background-color .25s var(--ease);}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--catamount);
+  transition:transform .3s var(--ease), opacity .25s var(--ease);}
+.menu-btn:hover{background:rgba(21,71,52,.07);}
+.menu-btn:focus-visible{outline:2px solid var(--catamount);outline-offset:2px;}
+.menu-btn:active{transform:scale(.94);}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.menu-panel{position:fixed;top:76px;left:0;right:0;z-index:59;
+  background:var(--fog);
+  border-bottom:1px solid var(--rule);box-shadow:0 20px 44px rgba(0,49,60,.12);
+  opacity:0;transform:translateY(-10px);visibility:hidden;
+  transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s var(--ease);}
+.menu-panel.open{opacity:1;transform:translateY(0);visibility:visible;}
+.menu-panel a{display:block;padding:15px 0;border-bottom:1px solid var(--rule);color:var(--catamount);
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:16px;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:transform .25s var(--ease), color .25s var(--ease);}
+.menu-panel a:hover{transform:translateX(6px);}
+.menu-panel a:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;}
+.menu-panel a:active{transform:translateX(6px) scale(.99);}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:3px;
+  font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:15px 26px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease),
+             background-color .28s var(--ease), border-color .28s var(--ease), color .28s var(--ease);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.btn:active{transform:translateY(1px) scale(.995);}
+
+.btn-gold{background:var(--gold);color:var(--catamount);
+  box-shadow:0 1px 2px rgba(0,49,60,.24), 0 6px 14px rgba(0,49,60,.16);}
+.btn-gold:hover{transform:translateY(-2px);
+  box-shadow:0 3px 6px rgba(0,49,60,.26), 0 12px 26px rgba(0,49,60,.22), 0 0 0 1px rgba(255,209,0,.5);}
+
+.arrowlink{display:inline-flex;align-items:center;gap:9px;
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:13.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--catamount);
+  transition:color .25s var(--ease);}
+.arrowlink svg{transition:transform .3s var(--ease);}
+.arrowlink:hover svg{transform:translateX(5px);}
+.arrowlink:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:2px;}
+.arrowlink:active{transform:translateY(1px);}
+.sociallink{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+  color:var(--catamount);transition:transform .25s var(--ease), opacity .25s var(--ease);}
+.sociallink svg{display:block;}
+.sociallink:hover{transform:translateY(-2px);opacity:.76;}
+.sociallink:active{transform:translateY(0);opacity:.68;}
+.sociallink:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:2px;}
+.advisorlink{color:var(--catamount);text-decoration:none;border-bottom:1px solid rgba(21,71,52,.28);
+  transition:color .25s var(--ease), border-color .25s var(--ease), opacity .25s var(--ease);}
+.advisorlink:hover{border-color:var(--catamount);}
+.advisorlink:active{opacity:.72;}
+.advisorlink:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+
+/* ---------- team ---------- */
+.member{position:relative;display:block;width:100%;padding:0;border:0;background:none;text-align:left;
+  cursor:pointer;border-radius:3px;transition:transform .45s var(--ease);}
+.member::before{content:"";position:absolute;inset:0;border-radius:3px;pointer-events:none;opacity:0;
+  box-shadow:0 2px 4px rgba(21,71,52,.08), 0 18px 36px -14px rgba(21,71,52,.42);transition:opacity .45s var(--ease);}
+.member:hover{transform:translateY(-4px);}
+.member:hover::before{opacity:1;}
+.member:active{transform:translateY(-1px);}
+.member:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;}
+.member-photo{display:block;}
+/* "Card Shift:" in a bio slides that card's photo up. The strip it uncovers along the
+   bottom is behind the caption's solid ground, so nothing shows. Not on phones, where
+   the caption sits below the photo and the strip would be bare. */
+@media (min-width:640px){.member-photo img[style*="--lift"]{transform:translateY(calc(-1 * var(--lift)));}}
+.member-photo::after{background:linear-gradient(to top, rgba(6,27,20,.5) 0%, rgba(6,27,20,.22) 12%, rgba(6,27,20,0) 30%);}
+.member-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;
+  gap:5px;padding:var(--s4);color:var(--bone);
+  /* the caption carries its own ground so the photo above it can stay bright */
+  background:linear-gradient(to top, rgba(6,27,20,.95), rgba(6,27,20,.88));}
+.member-name{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.15;
+  font-size:clamp(1.05rem,1.7vw,1.35rem);}
+.member-role{color:var(--mint);line-height:1.35;}
+.member-fellow{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:-.01em;font-size:13px;line-height:1.35;margin-top:-2px;}
+.member-cue{display:inline-flex;align-items:center;gap:7px;margin-top:6px;color:var(--gold);}
+.member-cue svg{transition:transform .3s var(--ease);}
+.member:hover .member-cue svg{transform:translateX(4px);}
+@media (max-width:639px){
+  /* two-up on a phone leaves no room over the photo: caption drops below it */
+  .member-cap{position:static;padding:var(--s3) 0 0;gap:3px;color:var(--ink);background:none;}
+  .member-name{color:var(--catamount);font-size:1.05rem;}
+  .member-role{color:var(--ink-faint);font-size:10.5px;letter-spacing:.1em;}
+  .member-fellow{color:var(--catamount);}
+  .member-cue{color:var(--catamount);margin-top:2px;}
+  .member-photo::after{background:linear-gradient(to top, rgba(6,27,20,.58), rgba(6,27,20,0) 40%);}
+}
+.team-empty{display:inline-block;border:1px dashed #C6CFC9;border-radius:4px;padding:var(--s4) var(--s5);}
+
+/* member drawer: native <dialog> for focus trap, Esc and focus return */
+.drawer{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;
+  border:0;background:transparent;overflow:hidden;overflow:clip;}
+.drawer::backdrop{background:transparent;}
+.drawer-scrim{position:absolute;inset:0;background:rgba(6,27,20,.55);opacity:0;transition:opacity .4s var(--ease);}
+.drawer-panel{position:absolute;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;
+  overflow-y:auto;overscroll-behavior:contain;transform:translateX(100%);transition:transform .5s var(--ease);
+  box-shadow:-1px 0 0 var(--rule), -28px 0 60px -24px rgba(6,27,20,.45);}
+.drawer.is-open .drawer-scrim{opacity:1;}
+.drawer.is-open .drawer-panel{transform:none;}
+.drawer-bar{position:sticky;top:0;z-index:3;display:flex;justify-content:flex-end;padding:var(--s4) var(--s5);
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);}
+.drawer-close{display:inline-flex;align-items:center;gap:8px;padding:6px 4px;border:0;background:none;cursor:pointer;
+  color:var(--catamount);transition:opacity .25s var(--ease);}
+.drawer-close:hover{opacity:.7;}
+.drawer-close:active{opacity:.55;}
+.drawer-close:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.drawer-body{padding:var(--s5) var(--s6) var(--s7);}
+.drawer-body .portrait .tone{display:none;}
+html:has(dialog.drawer[open]){overflow:hidden;}
+@media (prefers-reduced-motion: reduce){
+  .member,.member::before,.member-cue svg,.drawer-scrim,.drawer-panel{transition:none;}
+}
+
+/* ---------- cards ---------- */
+.card{position:relative;background:#fff;border:1px solid var(--rule);border-radius:4px;
+  box-shadow:var(--e2);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);}
+.card::before{content:"";position:absolute;top:-1px;left:-1px;width:56px;height:3px;background:var(--gold);
+  transform-origin:left;transform:scaleX(1);transition:transform .45s var(--ease);}
+.card:hover{transform:translateY(-5px);box-shadow:var(--e3);border-color:#D5DBD7;}
+.card:hover::before{transform:scaleX(2.4);}
+
+/* ---------- people ---------- */
+.portrait{position:relative;overflow:hidden;border-radius:3px;background:#DDE3DF;}
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease);}
+.portrait::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(6,27,20,.58), rgba(6,27,20,0) 40%);}
+.portrait .tone{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+  background:linear-gradient(150deg, rgba(21,71,52,.18), rgba(0,49,60,.08));}
+/* colophon: the (c) scaled to the cap height of the text beside it */
+.copy-mark{font-size:1.32em;line-height:0;}
+.colophon-link{color:inherit;text-decoration:none;border-bottom:1px solid transparent;
+  transition:color .25s var(--ease), border-color .25s var(--ease);}
+.colophon-link:hover{color:var(--catamount);border-color:var(--catamount);}
+.colophon-link:active{color:var(--catamount);border-color:var(--catamount);opacity:.75;}
+.colophon-link:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.colophon-sep{padding:0 .55em;opacity:.65;}
+/* the footer carries its own top padding - the last section doesn't need a full bottom pad too */
+main > section:last-of-type{padding-bottom:var(--s2);}
+.footlogo{display:inline-block;max-width:100%;border-radius:2px;transition:transform .35s var(--ease);}
+.footlogo:hover{transform:translateY(-2px);}
+.footlogo:active{transform:translateY(0);}
+.footlogo:focus-visible{outline:2px solid var(--catamount);outline-offset:8px;}
+
+/* ---------- motion ---------- */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.enter{opacity:0;animation:rise .95s var(--ease) forwards;}
+.d1{animation-delay:.05s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;
+    transition-duration:.001ms!important;}
+  .reveal{opacity:1;transform:none;}
+  .enter{opacity:1;}
+}
+
+/* a section that directly follows a page band needs less top padding */
+.section.section-top{padding-top:var(--s8);}
+
+/* inner-page title band */
+.pagehead{padding-top:calc(76px + var(--s7));padding-bottom:var(--s7);}
+@media (min-width:768px){
+  .pagehead{padding-top:calc(76px + var(--s8));padding-bottom:var(--s8);}
+}
+
+/* current page in the nav */
+.navlink.is-active{color:var(--catamount);}
+.navlink.is-active::after{transform:scaleX(1);}
+
+::selection{background:var(--gold);color:var(--catamount);}
+</style>
+</head>
+
+<body class="antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:z-[80] focus:top-3 focus:left-3 focus:bg-gold focus:text-catamount focus:px-4 focus:py-2 focus:rounded-sm tag">Skip to content</a>
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brandmark" aria-label="The Dorn Lab — home">
+      <img src="assets/dornlab_icon_outlined_thick.svg" alt="">
+      <span>
+        <span class="brandmark-the">The</span>
+        <span class="brandmark-name">Dorn Lab</span>
+      </span>
+    </a>
+
+    <nav class="hidden xl:flex items-center gap-7 ml-auto mr-1" aria-label="Primary">
+      <a class="navlink" href="research.html">Research</a>
+      <a class="navlink" href="publications.html">Publications</a>
+      <a class="navlink is-active" href="thegroup.html" aria-current="page">The Group</a>
+      <!-- hidden for now: <a class="navlink" href="news.html">News &amp; Updates</a> -->
+      <a class="navlink" href="resources.html">Resources</a>
+    </nav>
+
+    <div class="flex items-center gap-[var(--s3)]">
+      <a href="contact.html" class="btn btn-gold hidden sm:inline-flex">Contact</a>
+      <button type="button" class="menu-btn xl:hidden" id="menu-btn"
+              aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-panel xl:hidden" id="menu-panel">
+    <nav class="wrap py-[var(--s2)]" aria-label="Primary — mobile">
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="thegroup.html" aria-current="page">The Group</a>
+      <!-- hidden for now: <a href="news.html">News &amp; Updates</a> -->
+      <a href="resources.html">Resources</a>
+      <a href="contact.html" style="border-bottom:0;color:var(--mill)">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════════════ PAGE HEAD ══════════════════════════ -->
+<section class="ground-dark grain lattice overflow-hidden">
+  <div class="wrap pagehead relative z-10">
+    <h1 class="display enter d1 max-w-[20ch] text-[clamp(2.5rem,5.6vw,4.2rem)]">The Group</h1>
+  </div>
+</section>
+
+<section id="people" class="section section-top" style="background:#fff;border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <!-- PI -->
+    <div class="person reveal grid gap-[var(--s6)] md:grid-cols-12 md:gap-[var(--s7)] items-start">
+      <div class="portrait md:col-span-4 aspect-[4/5]">
+        <!-- build:pi-photo -->
+        <img src="assets/headshots/web/2026_SKD_Headshot.jpg" alt="Portrait of Stanna Dorn">
+        <!-- /build:pi-photo -->
+        <span class="tone"></span>
+      </div>
+
+      <div class="md:col-span-8">
+        <p class="tag" style="color:var(--ink-faint)">Principal investigator</p>
+        <!-- build:pi-head -->
+        <h3 class="display-sm mt-[var(--s3)] text-[clamp(1.8rem,3.4vw,2.4rem)]" style="color:var(--catamount)">
+          Stanna Dorn
+        </h3>
+        <p class="datum mt-2" style="color:var(--ink-faint)">Assistant Professor of Chemistry</p>
+        <p class="datum mt-[var(--s1)]" style="color:var(--ink-faint)">skdorn [at] uvm.edu</p>
+        <!-- /build:pi-head -->
+
+        <div class="mt-[var(--s5)] grid gap-x-[var(--s6)] gap-y-[var(--s5)] sm:grid-cols-2 border-t pt-[var(--s5)]"
+             style="border-color:var(--rule)">
+          <dl class="grid content-start gap-y-[var(--s6)]">
+            <div>
+              <dt class="tag" style="color:var(--ink-faint)">University of Vermont</dt>
+              <dd class="mt-[6px] text-[15.5px]">Assistant Professor of Chemistry (2026 – Present)</dd>
+            </div>
+            <div>
+              <dt class="tag" style="color:var(--ink-faint)">California Institute of Technology</dt>
+              <dd class="mt-[6px] text-[15.5px]">NIH MOSAIC K99/R00 Scholar (2024 – 2026)</dd>
+              <dd class="mt-[2px] text-[15.5px]">NIH NRSA F32 Postdoctoral Fellow (2023 – 2024)</dd>
+              <dd class="mt-[6px] text-[15.5px]" style="color:var(--ink-soft)"><em>Advisor:</em> <a class="advisorlink" href="https://reismangroup.caltech.edu/">Sarah E. Reisman</a></dd>
+            </div>
+            <div>
+              <dt class="tag" style="color:var(--ink-faint)">Indiana University - Bloomington</dt>
+              <dd class="mt-[6px] text-[15.5px]">Ph.D. in Chemistry (2017 – 2022)</dd>
+              <dd class="mt-[6px] text-[15.5px]" style="color:var(--ink-soft)"><em>Advisor:</em> <a class="advisorlink" href="https://kbrown.lab.iu.edu/">M. Kevin Brown</a></dd>
+            </div>
+          </dl>
+          <div>
+            <dl class="grid content-start gap-y-[var(--s6)]">
+              <div>
+                <dt class="tag" style="color:var(--ink-faint)">Hope College</dt>
+                <dd class="mt-[6px] text-[15.5px]">B.S. in Chemistry (2013 – 2017)</dd>
+                <dd class="mt-[2px] text-[15.5px]">B.A. in Music (2013 – 2017)</dd>
+                <dd class="mt-[6px] text-[15.5px]" style="color:var(--ink-soft)"><em>Advisor:</em> <a class="advisorlink" href="https://hope.edu/directory/people/johnson-jeffrey/">Jeffrey B. Johnson</a></dd>
+              </div>
+              <div>
+                <dt class="tag" style="color:var(--ink-faint)">Harvard Business School Online</dt>
+                <dd class="mt-[6px] text-[15.5px]">Certificate in Leadership and Management (2025)</dd>
+              </div>
+            </dl>
+            <!-- build:pi-links -->
+            <div class="mt-[var(--s6)] flex flex-col items-start gap-[var(--s4)]">
+              <a href="assets/SKDorn_ChemistryCV_11.44_UVM.pdf" class="arrowlink">
+                View CV
+                <svg width="17" height="11" viewBox="0 0 17 11" fill="none" aria-hidden="true">
+                  <path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="flex items-center gap-[var(--s3)] -ml-[3px]">
+                <a href="https://www.linkedin.com/in/stanna-dorn/" class="sociallink" aria-label="Stanna Dorn on LinkedIn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://scholar.google.com/citations?user=YkVUapkAAAAJ&amp;hl=en" class="sociallink" aria-label="Stanna Dorn on Google Scholar">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+                </a>
+                <a href="https://orcid.org/0000-0002-8644-9962" class="sociallink" aria-label="Stanna Dorn on ORCID">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+                </a>
+              </div>
+            </div>
+            <!-- /build:pi-links -->
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-12">
+        <!-- build:pi-bio -->
+        <p class="text-[16px] leading-[1.75]" style="color:var(--ink-soft);text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyphens:auto;">
+          Stanna was born and raised in rural northern Michigan, near Grayling. She obtained a
+          BS in Chemistry and a BA in music at Hope College, where she performed organometallic
+          research with Prof. Jeffrey B. Johnson. After a summer research experience in Prof.
+          John Montgomery’s group at the University of Michigan, Stanna pursued her doctoral
+          studies with Prof. M. Kevin Brown at Indiana University-Bloomington. Here, she
+          developed cooperative catalysis methods for alkene carboboration, predominantly with
+          copper and palladium. After receiving her PhD, Stanna worked as an NIH F32 and NIH
+          K99/R00 postdoctoral fellow in Prof. Sarah Reisman’s lab at Caltech, where she gained
+          synthetic and photochemical methodology experience. Currently, Stanna is an Assistant
+          Professor at the University of Vermont, where she leads a research group focused on
+          organic methodology and synthetic applications of boron- and nitrogen-containing
+          compounds. Outside of the lab, Stanna enjoys playing the flute, participating in team
+          sports, and finding the perfect bench for reading.
+        </p>
+        <!-- /build:pi-bio -->
+
+      </div>
+    </div>
+
+    <!-- team -->
+    <h3 id="team-postdoctoral-researchers" class="reveal mt-[var(--s9)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
+      Postdoctoral Researchers
+    </h3>
+    <ul class="mt-[var(--s5)] grid gap-[var(--s4)] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" role="list">
+        <li class="reveal">
+          <button type="button" class="member" data-open="member-jake-sirlin" aria-haspopup="dialog">
+            <span class="portrait member-photo aspect-[4/5]">
+              <img src="assets/headshots/web/2026_JTS_Postdoc_Headshot.jpg" alt="" loading="lazy" decoding="async" style="object-position:60% 50%;--lift:5%">
+              <span class="tone"></span>
+            </span>
+            <span class="member-cap">
+              <span class="member-name">Jake Sirlin</span>
+              <span class="member-role tag">Ph.D. University of North Carolina at Chapel Hill</span>
+              <span class="member-role tag">B.S. University of Miami</span>
+              <span class="member-cue tag">Bio &amp; contact <svg width="15" height="10" viewBox="0 0 17 11" fill="none" aria-hidden="true"><path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </button>
+        </li>
+    </ul>
+
+    <h3 id="team-graduate-students" class="reveal mt-[var(--s8)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
+      Graduate Students
+    </h3>
+    <p class="team-empty reveal mt-[var(--s5)] datum" style="color:var(--ink-faint)">Recruiting &mdash; <a class="advisorlink" href="contact.html#openings">see open positions</a></p>
+
+    <h3 id="team-undergraduate-students" class="reveal mt-[var(--s8)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
+      Undergraduate Students
+    </h3>
+    <ul class="mt-[var(--s5)] grid gap-[var(--s4)] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" role="list">
+        <li class="reveal">
+          <button type="button" class="member" data-open="member-tj-walsh" aria-haspopup="dialog">
+            <span class="portrait member-photo aspect-[4/5]">
+              <img src="assets/headshots/web/2026_TJW_Undergrad_Headshot.jpg" alt="" loading="lazy" decoding="async">
+              <span class="tone"></span>
+            </span>
+            <span class="member-cap">
+              <span class="member-name">TJ Walsh</span>
+              <span class="member-role tag">Class of 2028</span>
+              <span class="member-cue tag">Read bio <svg width="15" height="10" viewBox="0 0 17 11" fill="none" aria-hidden="true"><path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </button>
+        </li>
+        <li class="reveal">
+          <button type="button" class="member" data-open="member-miles-ottinger" aria-haspopup="dialog">
+            <span class="portrait member-photo aspect-[4/5]">
+              <img src="assets/headshots/web/2026_MO_Undergrad_Headshot.jpg" alt="" loading="lazy" decoding="async">
+              <span class="tone"></span>
+            </span>
+            <span class="member-cap">
+              <span class="member-name">Miles Ottinger</span>
+              <span class="member-role tag">Class of 2029</span>
+              <span class="member-cue tag">Read bio <svg width="15" height="10" viewBox="0 0 17 11" fill="none" aria-hidden="true"><path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </button>
+        </li>
+    </ul>
+
+    <h3 id="team-lab-mascots" class="reveal mt-[var(--s8)] tag pb-[var(--s3)] border-b" style="color:var(--ink-faint);border-color:var(--rule)">
+      Lab Mascots
+    </h3>
+    <ul class="mt-[var(--s5)] grid gap-[var(--s4)] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" role="list">
+        <li class="reveal">
+          <button type="button" class="member" data-open="member-fermion" aria-haspopup="dialog">
+            <span class="portrait member-photo aspect-[4/5]">
+              <img src="assets/headshots/web/Fermi_Headshot.jpg" alt="" loading="lazy" decoding="async">
+              <span class="tone"></span>
+            </span>
+            <span class="member-cap">
+              <span class="member-name">Fermion</span>
+              <span class="member-fellow">Quantum Cat Fellow (2021-Present)</span>
+              <span class="member-cue tag">Read bio <svg width="15" height="10" viewBox="0 0 17 11" fill="none" aria-hidden="true"><path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </button>
+        </li>
+        <li class="reveal">
+          <button type="button" class="member" data-open="member-ori" aria-haspopup="dialog">
+            <span class="portrait member-photo aspect-[4/5]">
+              <img src="assets/headshots/web/Ori_Headshot.jpg" alt="" loading="lazy" decoding="async">
+              <span class="tone"></span>
+            </span>
+            <span class="member-cap">
+              <span class="member-name">Ori</span>
+              <span class="member-fellow">Best Boy Scholar (2020-Present)</span>
+              <span class="member-cue tag">Read bio <svg width="15" height="10" viewBox="0 0 17 11" fill="none" aria-hidden="true"><path d="M1 5.5H15M15 5.5L10.6 1M15 5.5L10.6 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </span>
+          </button>
+        </li>
+    </ul>
+
+    <!-- /team -->
+  </div>
+</section>
+
+<!-- member drawers -->
+<dialog class="drawer" id="member-jake-sirlin" aria-labelledby="member-jake-sirlin-name">
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-panel">
+    <div class="drawer-bar">
+      <button type="button" class="drawer-close tag" data-close autofocus>
+        Close
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="portrait aspect-[4/5]">
+        <img src="assets/headshots/web/2026_JTS_Postdoc_Headshot.jpg" alt="Portrait of Jake Sirlin" loading="lazy" decoding="async" style="object-position:60% 50%">
+        <span class="tone"></span>
+      </div>
+      <h2 id="member-jake-sirlin-name" class="display-sm mt-[var(--s5)] text-[28px]" style="color:var(--catamount)">Jake Sirlin</h2>
+      <p class="datum mt-2" style="color:var(--ink-faint)">Postdoctoral Researcher</p>
+      <ul class="mt-[var(--s4)] space-y-[var(--s3)] text-[15px] leading-[1.55]" style="color:var(--ink)" role="list">
+        <li>Ph.D. University of North Carolina at Chapel Hill<br><span style="color:var(--ink-soft)"><em>Advisor:</em> Alex Miller</span></li>
+        <li>B.S. University of Miami<br><span style="color:var(--ink-soft)"><em>Advisor:</em> Carl Hoff</span></li>
+      </ul>
+      <p class="mt-[var(--s5)] text-[15.5px] leading-[1.75]" style="color:var(--ink-soft)">Jake started his journey as a chemist in his backyard after primary school, exploring acid-base reactions involving purple cabbage juice. After a few years of accredited parental review, they began their independent research career. Jake obtained their B.S. in chemistry and economics from the University of Miami, where they researched tin hyponitrite complexes under Prof. Carl Hoff. Jake earned their Ph.D. From the University of North Carolina at Chapel Hill under the direction of Professor Alex Miller, where they studied the mechanism of CO reduction by ruthenium complexes and their reactive intermediates. During their time at UNC, Jake co-chaired the 2024 Electron Donor-Acceptor Interactions Gordon Research Seminar. They also founded the Joint Wellness Team at UNC-Chapel Hill, which works to secure mental health resources for students and researchers in the chemistry department. Jake joined the Dorn Lab as a postdoctoral researcher in 2026, spending his time in the lab working on methodological development of synthetic routes to boron-containing heterocycles. Outside of the lab, Jake enjoys climbing, cuddling with his two cats Ori and Fermi, and playing Dungeons and Dragons with his fiancée Willow.</p>
+      <div class="mt-[var(--s6)] border-t pt-[var(--s5)]" style="border-color:var(--rule)">
+        <p class="flex items-center gap-[var(--s3)] text-[15px]" style="color:var(--ink)">
+          <span style="color:var(--catamount)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span><span class="sr-only">Email: </span>jsirlin [at] uvm.edu
+        </p>
+        <div class="mt-[var(--s4)] flex flex-wrap items-center gap-[var(--s3)]">
+          <a href="https://www.linkedin.com/in/jakesirlin/" class="sociallink" aria-label="Jake Sirlin on LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://orcid.org/0000-0003-3047-5667" class="sociallink" aria-label="Jake Sirlin on ORCID">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+<dialog class="drawer" id="member-tj-walsh" aria-labelledby="member-tj-walsh-name">
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-panel">
+    <div class="drawer-bar">
+      <button type="button" class="drawer-close tag" data-close autofocus>
+        Close
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="portrait aspect-[4/5]">
+        <img src="assets/headshots/web/2026_TJW_Undergrad_Headshot.jpg" alt="Portrait of TJ Walsh" loading="lazy" decoding="async">
+        <span class="tone"></span>
+      </div>
+      <h2 id="member-tj-walsh-name" class="display-sm mt-[var(--s5)] text-[28px]" style="color:var(--catamount)">TJ Walsh</h2>
+      <p class="datum mt-2" style="color:var(--ink-faint)">Undergraduate Researcher</p>
+      <ul class="mt-[var(--s4)] space-y-[var(--s3)] text-[15px] leading-[1.55]" style="color:var(--ink)" role="list">
+        <li>Class of 2028</li>
+      </ul>
+      <p class="mt-[var(--s5)] text-[15.5px] leading-[1.75]" style="color:var(--ink-soft)">TJ is a junior majoring in chemistry from Princeton, NJ. He is determined to improve his laboratory-based chemistry skills and learn more about organic synthesis theory. He is excited to dive deeper into his interest in organic chemistry in the Dorn lab. Outside of the lab he is an avid musician and skier, often making music with his friends and skiing the Vermont mountains on the weekends.</p>
+    </div>
+  </div>
+</dialog>
+<dialog class="drawer" id="member-miles-ottinger" aria-labelledby="member-miles-ottinger-name">
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-panel">
+    <div class="drawer-bar">
+      <button type="button" class="drawer-close tag" data-close autofocus>
+        Close
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="portrait aspect-[4/5]">
+        <img src="assets/headshots/web/2026_MO_Undergrad_Headshot.jpg" alt="Portrait of Miles Ottinger" loading="lazy" decoding="async">
+        <span class="tone"></span>
+      </div>
+      <h2 id="member-miles-ottinger-name" class="display-sm mt-[var(--s5)] text-[28px]" style="color:var(--catamount)">Miles Ottinger</h2>
+      <p class="datum mt-2" style="color:var(--ink-faint)">Undergraduate Researcher</p>
+      <ul class="mt-[var(--s4)] space-y-[var(--s3)] text-[15px] leading-[1.55]" style="color:var(--ink)" role="list">
+        <li>Class of 2029</li>
+      </ul>
+      <p class="mt-[var(--s5)] text-[15.5px] leading-[1.75]" style="color:var(--ink-soft)">Miles is a sophomore majoring in chemistry from Philadelphia, Pennsylvania. He’s excited to develop his skills in organic chemistry working in the Dorn lab. He hopes to explore total synthesis projects to further his understanding of laboratory techniques. Outside of the lab, he enjoys rock climbing and spending quality time with his friends.</p>
+    </div>
+  </div>
+</dialog>
+<dialog class="drawer" id="member-fermion" aria-labelledby="member-fermion-name">
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-panel">
+    <div class="drawer-bar">
+      <button type="button" class="drawer-close tag" data-close autofocus>
+        Close
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="portrait aspect-[4/5]">
+        <img src="assets/headshots/web/Fermi_Headshot.jpg" alt="Portrait of Fermion" loading="lazy" decoding="async">
+        <span class="tone"></span>
+      </div>
+      <h2 id="member-fermion-name" class="display-sm mt-[var(--s5)] text-[28px]" style="color:var(--catamount)">Fermion</h2>
+      <p class="datum mt-2" style="color:var(--ink-faint)">Quantum Cat Fellow (2021-Present)</p>
+      <p class="mt-[var(--s5)] text-[15.5px] leading-[1.75]" style="color:var(--ink-soft)">Fermion (or Fermi to his associates) is Jake&#x27;s cat. He has a ground-state spin state of 1/2, cannot sit still for more than 30 seconds (except for pets) and collapses into a cuddle pile when observed. He greatly enjoys tormenting his brother with a seemingly endless stream of love and affection. He also loves being held like a baby, because he knows he is one.</p>
+    </div>
+  </div>
+</dialog>
+<dialog class="drawer" id="member-ori" aria-labelledby="member-ori-name">
+  <div class="drawer-scrim" data-close></div>
+  <div class="drawer-panel">
+    <div class="drawer-bar">
+      <button type="button" class="drawer-close tag" data-close autofocus>
+        Close
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="portrait aspect-[4/5]">
+        <img src="assets/headshots/web/Ori_Headshot.jpg" alt="Portrait of Ori" loading="lazy" decoding="async">
+        <span class="tone"></span>
+      </div>
+      <h2 id="member-ori-name" class="display-sm mt-[var(--s5)] text-[28px]" style="color:var(--catamount)">Ori</h2>
+      <p class="datum mt-2" style="color:var(--ink-faint)">Best Boy Scholar (2020-Present)</p>
+      <p class="mt-[var(--s5)] text-[15.5px] leading-[1.75]" style="color:var(--ink-soft)">Ori is Jake&#x27;s cat. He was born missing a vertabre, has high levels of anxiety (primarily about his research), and is all around perfect. His hobbies include boxing, hissing at nothing through the window, and yelling at you until you cordially invite him for a cuddle.</p>
+    </div>
+  </div>
+</dialog>
+
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer-light" style="background:#fff;color:var(--ink)">
+  <div class="wrap py-[var(--s8)]">
+    <div class="flex flex-col items-start gap-[var(--s6)] md:flex-row md:items-center md:justify-between">
+      <a href="index.html" class="footlogo" aria-label="The Dorn Lab — home">
+        <img src="assets/dornlab_logo.svg" alt="" class="block h-[88px] md:h-[clamp(88px,11.1vw,128px)] w-auto">
+      </a>
+      <!-- UVM unit logo: horizontal lockup, Catamount Green (UVM Unit Logo Guidelines 2.1-2.2); see assets/uvm_chemistry_logo.svg -->
+      <a href="https://www.uvm.edu/cas/chemistry" class="footlogo">
+        <img src="assets/uvm_chemistry_logo.svg" alt="University of Vermont, College of Arts and Sciences, Department of Chemistry"
+             class="block w-full max-w-[306px] h-auto md:h-[clamp(42.8px,5.39vw,62.2px)] md:w-auto md:max-w-none">
+      </a>
+    </div>
+
+    <div class="mt-[var(--s8)] pt-[var(--s5)] border-t flex flex-wrap items-center justify-between gap-[var(--s4)]"
+         style="border-color:var(--rule)">
+      <p class="datum" style="color:var(--ink-faint)"><span class="copy-mark">©</span> 2026 Dorn Lab</p>
+      <p class="datum" style="color:var(--ink-faint)"><a class="colophon-link" href="https://www.uvm.edu/accessibility-services/digital-accessibility-compliance-uvm">Accessibility</a><span class="colophon-sep" aria-hidden="true">·</span><a class="colophon-link" href="https://www.uvm.edu/compliance/website-privacy-policy/terms-use">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// sticky nav state — also forced while the mobile menu is open, so the
+// bar stays legible when the panel sits over the dark hero
+const nav = document.getElementById('nav');
+const menuBtn = document.getElementById('menu-btn');
+const menuPanel = document.getElementById('menu-panel');
+
+// The bar sits out at the top of the page, tucks away once you have
+// scrolled past the hero, and slides back when the cursor comes near the
+// top edge — retreating again a couple of seconds after it leaves.
+const TUCK_AFTER = 260;    // px scrolled before the bar may tuck away
+const HOVER_BAND = 96;     // px from the top edge that counts as "at the header"
+const LINGER     = 1100;   // ms the cursor must be away before it tucks again
+
+let menuOpen = false, pointerUp = false, navFocused = false, awayTimer = null;
+// hover is the pointer route back; scrolling up brings it back on any device
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let lastY = window.scrollY, scrolledUp = false;
+
+const render = () => {
+  const scrolled = window.scrollY > TUCK_AFTER;
+  const out = !scrolled || pointerUp || navFocused || menuOpen || scrolledUp;
+  nav.classList.toggle('tucked', !out);
+  nav.classList.toggle('stuck', window.scrollY > 40 || menuOpen);
+};
+
+const onScroll = () => {
+  const y = window.scrollY;
+  if (y < lastY - 4) scrolledUp = true;
+  else if (y > lastY + 4) scrolledUp = false;
+  lastY = y;
+  render();
+};
+
+if (canHover) {
+  window.addEventListener('mousemove', (e) => {
+    if (e.clientY <= HOVER_BAND) {
+      clearTimeout(awayTimer); awayTimer = null;
+      if (!pointerUp) { pointerUp = true; render(); }
+    } else if (pointerUp && !awayTimer) {
+      awayTimer = setTimeout(() => {
+        awayTimer = null; pointerUp = false; render();
+      }, LINGER);
+    }
+  }, { passive: true });
+  // cursor leaving the window entirely counts as leaving the header
+  document.addEventListener('mouseleave', () => {
+    if (!pointerUp) return;
+    clearTimeout(awayTimer);
+    awayTimer = setTimeout(() => { awayTimer = null; pointerUp = false; render(); }, LINGER);
+  });
+}
+
+// keyboard users must never be tabbing into a bar they cannot see
+nav.addEventListener('focusin',  () => { navFocused = true;  render(); });
+nav.addEventListener('focusout', () => { navFocused = false; render(); });
+
+const setMenu = (open) => {
+  menuOpen = open;
+  menuPanel.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  render();
+};
+
+menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+menuPanel.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menuOpen) { setMenu(false); menuBtn.focus(); }
+});
+window.addEventListener('resize', () => { if (menuOpen && window.innerWidth >= 1280) setMenu(false); });
+
+render();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// scroll reveals — a deterministic sweep, so nothing can be scrolled past
+// while still invisible (fast scrolls and anchor jumps used to skip elements)
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pending = [...document.querySelectorAll('.reveal')];
+
+if (reduce) {
+  pending.forEach((el) => el.classList.add('in'));
+  pending = [];
+} else {
+  let queued = false;
+  const sweep = () => {
+    queued = false;
+    const line = window.innerHeight * 0.92;
+    let shown = 0;
+    pending = pending.filter((el) => {
+      if (el.getBoundingClientRect().top > line) return true;
+      el.style.transitionDelay = shown++ * 70 + 'ms';
+      el.classList.add('in');
+      return false;
+    });
+    if (!pending.length) {
+      window.removeEventListener('scroll', request);
+      window.removeEventListener('resize', request);
+    }
+  };
+  const request = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sweep);
+  };
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  sweep();
+}
+</script>
+<script>
+// member drawers: open on card click, slide out before closing
+(() => {
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const open = (d) => {
+    // The panel starts off-screen to the right. Opening a dialog focuses its first
+    // button, and a browser scrolls to whatever it focuses - so it would scroll the
+    // dialog sideways to reach the hidden panel, and the panel flashed in from the
+    // wrong side before settling (worst on phones, where the panel is full width).
+    // So: nothing inside is focusable while the dialog opens, and the Close button
+    // is focused afterwards without scrolling.
+    const panel = d.querySelector('.drawer-panel');
+    panel.inert = true;
+    d.showModal();
+    panel.inert = false;
+    d.scrollLeft = 0; d.scrollTop = 0;
+    const btn = d.querySelector('[data-close]');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      d.classList.add('is-open');
+      if (btn) btn.focus({ preventScroll: true });
+    }));
+  };
+  const close = (d) => {
+    if (!d.open || d.dataset.closing) return;
+    d.classList.remove('is-open');
+    if (still) return d.close();
+    d.dataset.closing = '1';
+    const done = () => { delete d.dataset.closing; if (d.open) d.close(); };
+    d.querySelector('.drawer-panel').addEventListener('transitionend', done, { once: true });
+    setTimeout(done, 600);
+  };
+  document.querySelectorAll('[data-open]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const d = document.getElementById(btn.dataset.open);
+      if (d) open(d);
+    });
+  });
+  document.querySelectorAll('dialog.drawer').forEach((d) => {
+    d.addEventListener('scroll', () => { d.scrollLeft = 0; d.scrollTop = 0; });   // the dialog itself never scrolls
+    d.addEventListener('click', (ev) => { if (ev.target === d || ev.target.closest('[data-close]')) close(d); });
+    d.addEventListener('cancel', (ev) => { ev.preventDefault(); close(d); });
+  });
+})();
+</script>
+</body>
+</html>

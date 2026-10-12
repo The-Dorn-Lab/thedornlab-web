@@ -1,0 +1,20 @@
+# Extra buttons for the Publications page.
+#
+# Each entry adds one button under a paper's journal button. The paper is found by its
+# DOI, wherever it sits in the .bib files in this folder. Save, refresh the page - done.
+#
+#   DOI:    the paper's DOI, as in its .bib entry (a full https://doi.org/... link works too)
+#   Link:   where the button goes - a web address, or a file on the site such as
+#           assets/publications/files/dorn2021_si.pdf
+#   Label:  the words on the button
+#
+# Start every entry with its DOI: line. For two buttons on one paper, write two entries
+# with the same DOI; they appear in the order written. Lines starting with "#" are notes.
+# An entry missing any of the three fields, or whose DOI matches no paper, is ignored.
+#
+# Example (remove the "# " to use it):
+#
+# DOI:    10.1002/anie.202103435
+# Link:   https://example.com/highlight
+# Label:  Highlight
+

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publications — Dorn Lab</title>
+<meta name="description" content="The Dorn Lab at the University of Vermont develops catalytic methods that turn strained rings and heterocycles into bacterial natural products and medicinal chemistry building blocks.">
+<link rel="icon" href="assets/dornlab_icon_outlined_thick.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        catamount: '#154734',
+        gold:      '#FFD100',
+        slate:     '#00313C',
+        fog:       '#F7F7F7',
+        mill:      '#DC582A',
+        forest:    '#061B14',
+        mint:      '#8FCFAF',
+        bone:      '#F4F6F3',
+      },
+      fontFamily: {
+        display: ['Lora', 'Georgia', 'serif'],
+        sans:    ['Roboto', 'system-ui', 'sans-serif'],
+        cond:    ['"Roboto Condensed"', 'Roboto', 'sans-serif'],
+        mono:    ['"Roboto Mono"', 'ui-monospace', 'monospace'],
+      },
+    },
+  },
+};
+</script>
+
+<style>
+/* ------------------------------------------------------------------ *
+   Dorn Lab — tokens
+   Palette is UVM's, verbatim: Catamount Green, Gold, Vermont Slate,
+   Morning Fog, Old Mill. Forest + mint are derivations used only where
+   the brand palette needs a darker ground or a legible tint on it.
+ * ------------------------------------------------------------------ */
+:root{
+  --catamount:#154734;
+  --gold:#FFD100;
+  --slate:#00313C;
+  --fog:#F7F7F7;
+  --mill:#DC582A;
+  --forest:#061B14;
+  --mint:#8FCFAF;
+  --bone:#F4F6F3;
+
+  --ink:#202C27;
+  --ink-soft:#57665F;
+  --ink-faint:#8A9791;
+  --rule:#E3E7E4;
+  --rule-dark:rgba(143,207,175,.20);
+
+  /* spacing scale — every gap on the page comes from this set */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* layered, green-tinted elevation — base / elevated / floating */
+  --e1:0 1px 2px rgba(21,71,52,.05), 0 2px 6px rgba(0,49,60,.04);
+  --e2:0 1px 0 rgba(255,255,255,.7) inset, 0 2px 4px rgba(21,71,52,.05), 0 10px 26px rgba(0,49,60,.07);
+  --e3:0 1px 0 rgba(255,255,255,.7) inset, 0 8px 18px rgba(21,71,52,.08), 0 26px 58px rgba(0,49,60,.13);
+
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:88px;}
+body{
+  background:var(--fog);
+  color:var(--ink);
+  font-family:'Roboto',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- type roles ---------- */
+.display{font-family:'Lora',Georgia,serif;letter-spacing:-.03em;line-height:1.04;font-weight:600;}
+.display-sm{font-family:'Lora',Georgia,serif;letter-spacing:-.02em;line-height:1.18;font-weight:600;}
+.tag{
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1;
+}
+.datum{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;}
+/* Centred column. Measured at a 1440 viewport the edge-to-text inset was
+   168px (120 gutter + 48 padding); 1250px brings that to 143px — 15% less. */
+.wrap{width:100%;max-width:1250px;margin:0 auto;padding-left:var(--s5);padding-right:var(--s5);}
+.section{padding-top:var(--s9);padding-bottom:var(--s9);}
+@media (min-width:768px){
+  .wrap{padding-left:var(--s7);padding-right:var(--s7);}
+  .section{padding-top:var(--s10);padding-bottom:var(--s10);}
+}
+
+/* ---------- texture ---------- */
+.grain{position:relative;}
+.grain::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+.lattice::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'><g fill='none' stroke='%238FCFAF' stroke-width='1.1'><path d='M28 0.5 L55.5 16.7 L55.5 48.5 L28 64.7 L0.5 48.5 L0.5 16.7 Z'/><path d='M28 64.7 L28 96.5'/></g></svg>");
+}
+
+/* ---------- dark ground ---------- */
+.ground-dark{
+  position:relative;isolation:isolate;color:var(--bone);
+  background:
+    radial-gradient(900px 520px at 12% -8%, rgba(143,207,175,.16), transparent 62%),
+    radial-gradient(760px 460px at 88% 8%, rgba(0,49,60,.85), transparent 65%),
+    radial-gradient(680px 520px at 62% 108%, rgba(255,209,0,.11), transparent 60%),
+    linear-gradient(168deg, #0A2419 0%, var(--forest) 38%, #04241F 74%, var(--slate) 100%);
+}
+/* The bar is a frosted pane: it lets the hue of whatever sits behind it
+   come through, but brightness() lifts a dark backdrop before the
+   translucent fog goes over it, so the green text never loses contrast. */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;
+  background-color:rgba(247,247,247,.72);
+  -webkit-backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  backdrop-filter:blur(18px) saturate(1.8) brightness(1.35);
+  border-bottom:1px solid var(--rule);
+  transform:translateY(0);will-change:transform;
+  transition:transform .45s var(--ease), box-shadow .35s var(--ease);}
+.nav.stuck{box-shadow:0 1px 24px rgba(0,49,60,.07);}
+/* without backdrop-filter there is nothing to lift a dark backdrop,
+   so fall back to a near-opaque bar rather than unreadable text */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav{background-color:rgba(247,247,247,.96);}
+}
+/* tucked away past the hero; slides back on hover near the top edge */
+.nav.tucked{transform:translateY(-100%);}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:var(--s5);}
+/* icon + name lockup: hexagonal mark beside the lab name, after the
+   reference sites' headers */
+.brandmark{display:inline-flex;align-items:center;gap:13px;flex:none;
+  transition:transform .25s var(--ease);}
+.brandmark:hover{transform:translateY(-1px);}
+.brandmark:active{transform:translateY(1px);}
+.brandmark:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:3px;}
+.brandmark img{height:44px;width:auto;display:block;flex:none;}
+.brandmark-the{display:block;margin-bottom:4px;
+  font-family:'Roboto',system-ui,sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--catamount);line-height:1;}
+.brandmark-name{display:block;font-family:'Roboto',system-ui,sans-serif;font-weight:700;
+  font-size:24px;letter-spacing:-.02em;line-height:1;color:var(--catamount);
+  white-space:nowrap;}
+
+.navlink{position:relative;font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:13.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--catamount);padding:10px 2px;
+  transition:color .25s var(--ease), opacity .25s var(--ease);}
+.navlink::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
+.navlink:hover::after,.navlink:focus-visible::after{transform:scaleX(1);}
+.navlink:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.navlink:active{transform:translateY(1px);}
+
+/* ---------- mobile menu ---------- */
+.menu-btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:44px;height:44px;border-radius:3px;flex:none;
+  transition:transform .25s var(--ease), background-color .25s var(--ease);}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--catamount);
+  transition:transform .3s var(--ease), opacity .25s var(--ease);}
+.menu-btn:hover{background:rgba(21,71,52,.07);}
+.menu-btn:focus-visible{outline:2px solid var(--catamount);outline-offset:2px;}
+.menu-btn:active{transform:scale(.94);}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.menu-panel{position:fixed;top:76px;left:0;right:0;z-index:59;
+  background:var(--fog);
+  border-bottom:1px solid var(--rule);box-shadow:0 20px 44px rgba(0,49,60,.12);
+  opacity:0;transform:translateY(-10px);visibility:hidden;
+  transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s var(--ease);}
+.menu-panel.open{opacity:1;transform:translateY(0);visibility:visible;}
+.menu-panel a{display:block;padding:15px 0;border-bottom:1px solid var(--rule);color:var(--catamount);
+  font-family:'Roboto Condensed',sans-serif;font-weight:600;font-size:16px;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:transform .25s var(--ease), color .25s var(--ease);}
+.menu-panel a:hover{transform:translateX(6px);}
+.menu-panel a:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;}
+.menu-panel a:active{transform:translateX(6px) scale(.99);}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:3px;
+  font-family:'Roboto Condensed',sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:15px 26px;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease),
+             background-color .28s var(--ease), border-color .28s var(--ease), color .28s var(--ease);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.btn:active{transform:translateY(1px) scale(.995);}
+
+.btn-gold{background:var(--gold);color:var(--catamount);
+  box-shadow:0 1px 2px rgba(0,49,60,.24), 0 6px 14px rgba(0,49,60,.16);}
+.btn-gold:hover{transform:translateY(-2px);
+  box-shadow:0 3px 6px rgba(0,49,60,.26), 0 12px 26px rgba(0,49,60,.22), 0 0 0 1px rgba(255,209,0,.5);}
+.advisorlink{color:var(--catamount);text-decoration:none;border-bottom:1px solid rgba(21,71,52,.28);
+  transition:color .25s var(--ease), border-color .25s var(--ease), opacity .25s var(--ease);}
+.advisorlink:hover{border-color:var(--catamount);}
+.advisorlink:active{opacity:.72;}
+.advisorlink:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+/* colophon: the (c) scaled to the cap height of the text beside it */
+.copy-mark{font-size:1.32em;line-height:0;}
+.colophon-link{color:inherit;text-decoration:none;border-bottom:1px solid transparent;
+  transition:color .25s var(--ease), border-color .25s var(--ease);}
+.colophon-link:hover{color:var(--catamount);border-color:var(--catamount);}
+.colophon-link:active{color:var(--catamount);border-color:var(--catamount);opacity:.75;}
+.colophon-link:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.colophon-sep{padding:0 .55em;opacity:.65;}
+/* the footer carries its own top padding - the last section doesn't need a full bottom pad too */
+main > section:last-of-type{padding-bottom:var(--s2);}
+.footlogo{display:inline-block;max-width:100%;border-radius:2px;transition:transform .35s var(--ease);}
+.footlogo:hover{transform:translateY(-2px);}
+.footlogo:active{transform:translateY(0);}
+.footlogo:focus-visible{outline:2px solid var(--catamount);outline-offset:8px;}
+
+/* ---------- motion ---------- */
+.reveal{opacity:0;transform:translateY(20px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.enter{opacity:0;animation:rise .95s var(--ease) forwards;}
+.d1{animation-delay:.05s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;
+    transition-duration:.001ms!important;}
+  .reveal{opacity:1;transform:none;}
+  .enter{opacity:1;}
+}
+
+/* a section that directly follows a page band needs less top padding */
+.section.section-top{padding-top:var(--s8);}
+
+/* inner-page title band */
+.pagehead{padding-top:calc(76px + var(--s7));padding-bottom:var(--s7);}
+@media (min-width:768px){
+  .pagehead{padding-top:calc(76px + var(--s8));padding-bottom:var(--s8);}
+}
+
+/* current page in the nav */
+.navlink.is-active{color:var(--catamount);}
+.navlink.is-active::after{transform:scaleX(1);}
+
+::selection{background:var(--gold);color:var(--catamount);}
+/* Drawn by the script at the foot of the page: one <details> per .bib file in assets/publications/ */
+.pubyear{border-bottom:1px solid var(--rule);}
+.pubyear > summary{display:flex;align-items:baseline;gap:var(--s4);cursor:pointer;list-style:none;
+  padding:var(--s6) 0 var(--s4);border-bottom:2px solid var(--catamount);margin-bottom:-1px;
+  color:var(--catamount);}
+.pubyear > summary::-webkit-details-marker{display:none;}
+.pubyear-label{font-size:clamp(1.6rem,3vw,2.1rem);transition:transform .35s var(--ease);}
+.pubyear-count{margin-left:auto;color:var(--ink-faint);}
+.pubyear-chev{flex:none;align-self:center;transition:transform .45s var(--ease);}
+.pubyear[open] .pubyear-chev{transform:rotate(180deg);}
+.pubyear > summary:hover .pubyear-label{transform:translateX(5px);}
+.pubyear > summary:active .pubyear-label{transform:translateX(2px);}
+.pubyear > summary:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;border-radius:2px;}
+
+.pubs{list-style:none;margin:0;padding:0;}
+.pubyear[open] > .pubs{animation:pubs-in .5s var(--ease) both;}
+@keyframes pubs-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+.pubs-empty{padding:var(--s5) 0;color:var(--ink-faint);}
+
+.pub{display:grid;grid-template-columns:36px 1fr;column-gap:var(--s4);row-gap:var(--s3);
+  padding:var(--s5) 0;border-top:1px solid var(--rule);}
+.pub:first-child{border-top:0;}
+/* the running number is the one loud thing in the row */
+.pub-n{font-family:'Lora',Georgia,serif;font-weight:600;font-size:22px;line-height:1;letter-spacing:-.03em;
+  font-variant-numeric:lining-nums tabular-nums;color:var(--catamount);padding-top:2px;}
+.pub-title{font-family:'Lora',Georgia,serif;font-weight:600;font-size:19px;line-height:1.32;
+  letter-spacing:-.01em;color:var(--ink);max-width:62ch;}
+.pub-title a{color:inherit;text-decoration:none;}
+.pub-title a:hover{color:var(--catamount);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;}
+.pub-title a:active{opacity:.72;}
+.pub-title a:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+.pub-authors{margin-top:6px;font-size:15px;line-height:1.6;color:var(--ink-soft);max-width:82ch;}
+.pub-authors strong{font-weight:600;color:var(--ink);}
+.pub-ref{margin-top:4px;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
+.pub-ref b{font-weight:600;color:var(--ink);}
+.pub-doi{color:inherit;text-decoration:none;border-bottom:1px solid rgba(21,71,52,.28);overflow-wrap:anywhere;}
+.pub-doi:hover{color:var(--catamount);border-color:var(--catamount);}
+.pub-doi:active{opacity:.72;}
+.pub-doi:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;border-radius:2px;}
+/* search box beside the profile links */
+.pub[hidden],.pubyear[hidden]{display:none;}
+.pub-search{position:relative;display:flex;align-items:center;color:var(--ink-faint);}
+.pub-search svg{position:absolute;left:11px;pointer-events:none;}
+.pub-search input{width:min(100%,290px);min-width:230px;padding:9px 12px 9px 33px;font-size:14.5px;line-height:1.3;
+  color:var(--ink);background:#fff;border:1px solid #C6CFC9;border-radius:3px;
+  box-shadow:0 1px 1px rgba(21,71,52,.05), 0 6px 14px -8px rgba(21,71,52,.18);}
+.pub-search input::placeholder{color:var(--ink-faint);}
+.pub-search input:hover{border-color:var(--ink-faint);}
+.pub-search input:focus-visible{outline:2px solid var(--catamount);outline-offset:2px;border-color:var(--catamount);}
+.pub-search:focus-within{color:var(--catamount);}
+/* graphical abstract, from TOC.txt */
+.pub-toc{display:block;margin-top:var(--s4);max-width:min(100%,460px);height:auto;border:1px solid var(--rule);
+  border-radius:3px;background:#fff;box-shadow:0 1px 1px rgba(21,71,52,.05), 0 10px 24px -14px rgba(21,71,52,.22);}
+.pub-links{grid-column:2;display:flex;flex-wrap:wrap;gap:var(--s2);}
+.pub-link{display:inline-flex;align-items:center;gap:7px;
+  text-transform:none;   /* journal acronyms keep their own case: JoCE, eLife */
+  padding:9px 11px;border:1px solid #C6CFC9;border-radius:3px;color:var(--catamount);background:#fff;
+  box-shadow:0 1px 1px rgba(21,71,52,.05), 0 6px 14px -8px rgba(21,71,52,.18);
+  transition:transform .28s var(--ease);}
+.pub-link svg{transition:transform .3s var(--ease);}
+.pub-link:hover{transform:translateY(-2px);}
+.pub-link:hover svg{transform:translate(2px,-2px);}
+.pub-link:active{transform:translateY(0);}
+.pub-link:focus-visible{outline:2px solid var(--catamount);outline-offset:3px;}
+@media (min-width:768px){
+  .pub{grid-template-columns:54px 1fr auto;column-gap:var(--s5);align-items:start;padding:var(--s6) 0;}
+  .pub-n{font-size:30px;padding-top:0;}
+  .pub-links{grid-column:3;flex-direction:column;align-items:flex-end;margin-top:2px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .pubyear[open] > .pubs{animation:none;}
+  .pubyear-label,.pubyear-chev,.pub-link,.pub-link svg{transition:none;}
+}
+</style>
+</head>
+
+<body class="antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:z-[80] focus:top-3 focus:left-3 focus:bg-gold focus:text-catamount focus:px-4 focus:py-2 focus:rounded-sm tag">Skip to content</a>
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brandmark" aria-label="The Dorn Lab — home">
+      <img src="assets/dornlab_icon_outlined_thick.svg" alt="">
+      <span>
+        <span class="brandmark-the">The</span>
+        <span class="brandmark-name">Dorn Lab</span>
+      </span>
+    </a>
+
+    <nav class="hidden xl:flex items-center gap-7 ml-auto mr-1" aria-label="Primary">
+      <a class="navlink" href="research.html">Research</a>
+      <a class="navlink is-active" href="publications.html" aria-current="page">Publications</a>
+      <a class="navlink" href="thegroup.html">The Group</a>
+      <!-- hidden for now: <a class="navlink" href="news.html">News &amp; Updates</a> -->
+      <a class="navlink" href="resources.html">Resources</a>
+    </nav>
+
+    <div class="flex items-center gap-[var(--s3)]">
+      <a href="contact.html" class="btn btn-gold hidden sm:inline-flex">Contact</a>
+      <button type="button" class="menu-btn xl:hidden" id="menu-btn"
+              aria-expanded="false" aria-controls="menu-panel" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-panel xl:hidden" id="menu-panel">
+    <nav class="wrap py-[var(--s2)]" aria-label="Primary — mobile">
+      <a href="research.html">Research</a>
+      <a href="publications.html" aria-current="page">Publications</a>
+      <a href="thegroup.html">The Group</a>
+      <!-- hidden for now: <a href="news.html">News &amp; Updates</a> -->
+      <a href="resources.html">Resources</a>
+      <a href="contact.html" style="border-bottom:0;color:var(--mill)">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════════════ PAGE HEAD ══════════════════════════ -->
+<section class="ground-dark grain lattice overflow-hidden">
+  <div class="wrap pagehead relative z-10">
+    <h1 class="display enter d1 max-w-[20ch] text-[clamp(2.5rem,5.6vw,4.2rem)]">Publications</h1>
+  </div>
+</section>
+
+<!-- ══════════════════════════ THE LIST ══════════════════════════ -->
+<!-- Nothing to rebuild: the script at the foot of this page reads the .bib files in
+     assets/publications/ each time the page loads. See assets/publications/README.md -->
+<section class="section section-top" style="background:#fff;border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="reveal flex flex-wrap items-baseline justify-between gap-x-[var(--s6)] gap-y-[var(--s3)]">
+      <p class="text-[16px] leading-[1.7]" style="color:var(--ink-soft)">
+        Dorn Lab members are shown in <strong style="font-weight:600;color:var(--ink)">bold</strong>.
+      </p>
+      <div class="flex flex-wrap items-center gap-x-[var(--s6)] gap-y-[var(--s3)]">
+        <p class="flex flex-wrap items-baseline gap-x-[var(--s4)] gap-y-2 text-[15px]">
+          <span class="tag" style="color:var(--ink-faint)">Full profile</span>
+          <a class="advisorlink" href="https://scholar.google.com/citations?user=YkVUapkAAAAJ&amp;hl=en">Google Scholar</a>
+          <a class="advisorlink" href="https://orcid.org/0000-0002-8644-9962">ORCID</a>
+        </p>
+        <label class="pub-search">
+          <span class="sr-only">Search publications</span>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <circle cx="6.4" cy="6.4" r="4.6" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M10 10l3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <input id="pub-search" type="search" placeholder="Search title, author, journal, year" autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+    </div>
+
+    <div id="pubs" class="reveal mt-[var(--s5)]" aria-live="polite">
+      <p class="pubs-empty datum">Loading publications&hellip;</p>
+    </div>
+    <p id="pubs-status" class="pubs-empty datum" role="status" hidden></p>
+    <noscript>
+      <p class="pubs-empty datum">The list needs JavaScript. The profiles linked above carry the same papers.</p>
+    </noscript>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer-light" style="background:#fff;color:var(--ink)">
+  <div class="wrap py-[var(--s8)]">
+    <div class="flex flex-col items-start gap-[var(--s6)] md:flex-row md:items-center md:justify-between">
+      <a href="index.html" class="footlogo" aria-label="The Dorn Lab — home">
+        <img src="assets/dornlab_logo.svg" alt="" class="block h-[88px] md:h-[clamp(88px,11.1vw,128px)] w-auto">
+      </a>
+      <!-- UVM unit logo: horizontal lockup, Catamount Green (UVM Unit Logo Guidelines 2.1-2.2); see assets/uvm_chemistry_logo.svg -->
+      <a href="https://www.uvm.edu/cas/chemistry" class="footlogo">
+        <img src="assets/uvm_chemistry_logo.svg" alt="University of Vermont, College of Arts and Sciences, Department of Chemistry"
+             class="block w-full max-w-[306px] h-auto md:h-[clamp(42.8px,5.39vw,62.2px)] md:w-auto md:max-w-none">
+      </a>
+    </div>
+
+    <div class="mt-[var(--s8)] pt-[var(--s5)] border-t flex flex-wrap items-center justify-between gap-[var(--s4)]"
+         style="border-color:var(--rule)">
+      <p class="datum" style="color:var(--ink-faint)"><span class="copy-mark">©</span> 2026 Dorn Lab</p>
+      <p class="datum" style="color:var(--ink-faint)"><a class="colophon-link" href="https://www.uvm.edu/accessibility-services/digital-accessibility-compliance-uvm">Accessibility</a><span class="colophon-sep" aria-hidden="true">·</span><a class="colophon-link" href="https://www.uvm.edu/compliance/website-privacy-policy/terms-use">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// sticky nav state — also forced while the mobile menu is open, so the
+// bar stays legible when the panel sits over the dark hero
+const nav = document.getElementById('nav');
+const menuBtn = document.getElementById('menu-btn');
+const menuPanel = document.getElementById('menu-panel');
+
+// The bar sits out at the top of the page, tucks away once you have
+// scrolled past the hero, and slides back when the cursor comes near the
+// top edge — retreating again a couple of seconds after it leaves.
+const TUCK_AFTER = 260;    // px scrolled before the bar may tuck away
+const HOVER_BAND = 96;     // px from the top edge that counts as "at the header"
+const LINGER     = 1100;   // ms the cursor must be away before it tucks again
+
+let menuOpen = false, pointerUp = false, navFocused = false, awayTimer = null;
+// hover is the pointer route back; scrolling up brings it back on any device
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let lastY = window.scrollY, scrolledUp = false;
+
+const render = () => {
+  const scrolled = window.scrollY > TUCK_AFTER;
+  const out = !scrolled || pointerUp || navFocused || menuOpen || scrolledUp;
+  nav.classList.toggle('tucked', !out);
+  nav.classList.toggle('stuck', window.scrollY > 40 || menuOpen);
+};
+
+const onScroll = () => {
+  const y = window.scrollY;
+  if (y < lastY - 4) scrolledUp = true;
+  else if (y > lastY + 4) scrolledUp = false;
+  lastY = y;
+  render();
+};
+
+if (canHover) {
+  window.addEventListener('mousemove', (e) => {
+    if (e.clientY <= HOVER_BAND) {
+      clearTimeout(awayTimer); awayTimer = null;
+      if (!pointerUp) { pointerUp = true; render(); }
+    } else if (pointerUp && !awayTimer) {
+      awayTimer = setTimeout(() => {
+        awayTimer = null; pointerUp = false; render();
+      }, LINGER);
+    }
+  }, { passive: true });
+  // cursor leaving the window entirely counts as leaving the header
+  document.addEventListener('mouseleave', () => {
+    if (!pointerUp) return;
+    clearTimeout(awayTimer);
+    awayTimer = setTimeout(() => { awayTimer = null; pointerUp = false; render(); }, LINGER);
+  });
+}
+
+// keyboard users must never be tabbing into a bar they cannot see
+nav.addEventListener('focusin',  () => { navFocused = true;  render(); });
+nav.addEventListener('focusout', () => { navFocused = false; render(); });
+
+const setMenu = (open) => {
+  menuOpen = open;
+  menuPanel.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  render();
+};
+
+menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+menuPanel.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menuOpen) { setMenu(false); menuBtn.focus(); }
+});
+window.addEventListener('resize', () => { if (menuOpen && window.innerWidth >= 1280) setMenu(false); });
+
+render();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// scroll reveals — a deterministic sweep, so nothing can be scrolled past
+// while still invisible (fast scrolls and anchor jumps used to skip elements)
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pending = [...document.querySelectorAll('.reveal')];
+
+if (reduce) {
+  pending.forEach((el) => el.classList.add('in'));
+  pending = [];
+} else {
+  let queued = false;
+  const sweep = () => {
+    queued = false;
+    const line = window.innerHeight * 0.92;
+    let shown = 0;
+    pending = pending.filter((el) => {
+      if (el.getBoundingClientRect().top > line) return true;
+      el.style.transitionDelay = shown++ * 70 + 'ms';
+      el.classList.add('in');
+      return false;
+    });
+    if (!pending.length) {
+      window.removeEventListener('scroll', request);
+      window.removeEventListener('resize', request);
+    }
+  };
+  const request = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sweep);
+  };
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  sweep();
+}
+</script>
+<script>
+// ── Publications ─────────────────────────────────────────────────────────────
+// Reads assets/publications/ on every page load, so adding or editing a .bib
+// file is the whole update. A browser cannot list a folder, but the file names
+// are predictable, so the page simply asks for each one it might find:
+//   prior_uvm.bib            -> "Prior to UVM"
+//   2026.bib, 2027.bib, ...  -> one heading per year
+// A heading appears only when its file is there. group_members.txt (written by
+// build_team.py) says whose names are set in bold.
+(() => {
+  const DIR = 'assets/publications/';
+  const FIRST_YEAR = 2020;                       // earliest year file the page looks for
+  const LAST_YEAR = new Date().getFullYear() + 1;
+  const root = document.getElementById('pubs');
+  if (!root) return;
+
+  const MONTHS = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+
+  // The button beside each paper carries the journal's acronym if one is listed here;
+  // any journal not listed shows its abbreviation exactly as written in the .bib file.
+  // To add one: the journal as the .bib file has it on the left, the acronym on the right.
+  const JOURNAL_ACRONYMS = {
+    'J. Am. Chem. Soc.': 'JACS',
+    'Journal of the American Chemical Society': 'JACS',
+    'Angew. Chem. Int. Ed.': 'ACIE',
+    'Angewandte Chemie International Edition': 'ACIE',
+    'J. Chem. Educ.': 'JoCE',
+    'Journal of Chemical Education': 'JoCE',
+    // 'ACS Catalysis': 'ACS Cat',
+    // 'ACS Catal.': 'ACS Cat',
+    // 'ACS Cent. Sci.': 'ACS Cent. Sci.',
+  };
+  const journalKey = (j) => j.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const ACRONYM_BY_KEY = Object.fromEntries(Object.entries(JOURNAL_ACRONYMS).map(([k, v]) => [journalKey(k), v]));
+  function acronym(journal) {
+    const name = tex(journal || '');
+    return ACRONYM_BY_KEY[journalKey(name)] || name;
+  }
+  const GREEK = {alpha:'α',beta:'β',gamma:'γ',delta:'δ',epsilon:'ε',eta:'η',kappa:'κ',lambda:'λ',mu:'μ',
+                 pi:'π',sigma:'σ',tau:'τ',omega:'ω',Delta:'Δ',Sigma:'Σ',Omega:'Ω',pm:'±',times:'×'};
+  const ACCENT = {"'":'\u0301','`':'\u0300','^':'\u0302','"':'\u0308','~':'\u0303'};
+
+  // LaTeX as Zotero writes it -> plain text
+  const tex = (s) => s
+    .replace(/\$\\([A-Za-z]+)\$/g, (m, w) => GREEK[w] || w)
+    .replace(/\\(['`^"~])\s*\{?([A-Za-z])\}?/g, (m, a, c) => (c + ACCENT[a]).normalize('NFC'))
+    .replace(/\\copyright/g, '©').replace(/\\-/g, '').replace(/---/g, '—').replace(/--/g, '–')
+    .replace(/\\([&%_#$])/g, '$1')
+    .replace(/\\[A-Za-z]+\s*/g, '')
+    .replace(/[{}]/g, '').replace(/~/g, '\u00a0')
+    .replace(/\s+/g, ' ').trim();
+
+  // [{type, key, title, author, ...}] - braces balanced by hand
+  function parseBib(text) {
+    const out = [];
+    const head = /@(\w+)\s*\{/g;
+    let m;
+    while ((m = head.exec(text))) {
+      if (/^(comment|preamble|string)$/i.test(m[1])) continue;
+      let i = head.lastIndex;
+      const comma = text.indexOf(',', i);
+      if (comma < 0) break;
+      const d = { type: m[1].toLowerCase(), key: text.slice(i, comma).trim() };
+      i = comma + 1;
+      for (;;) {
+        const f = /^\s*([A-Za-z][\w-]*)\s*=\s*/.exec(text.slice(i, i + 200));
+        if (!f) break;
+        i += f[0].length;
+        let val = '';
+        if (text[i] === '{') {
+          let depth = 0, k = i;
+          for (; k < text.length; k++) {
+            if (text[k] === '{') depth++;
+            else if (text[k] === '}' && --depth === 0) break;
+          }
+          val = text.slice(i + 1, k); i = k + 1;
+        } else if (text[i] === '"') {
+          const k = text.indexOf('"', i + 1);
+          val = text.slice(i + 1, k); i = k + 1;
+        } else {
+          const v = /^[^,}\s]+/.exec(text.slice(i, i + 200));
+          val = v ? v[0] : ''; i += val.length;
+        }
+        d[f[1].toLowerCase()] = val.trim();
+        const c = /^\s*,/.exec(text.slice(i, i + 50));
+        if (c) i += c[0].length;
+      }
+      head.lastIndex = i;
+      out.push(d);
+    }
+    return out;
+  }
+
+  // "A and {B and C} and D" -> ["A", "{B and C}", "D"]
+  function splitAuthors(raw) {
+    const parts = []; let depth = 0, cur = '';
+    for (const tok of raw.split(/(\s+and\s+|[{}])/)) {
+      if (tok === '{') depth++;
+      else if (tok === '}') depth--;
+      if (depth === 0 && /^\s+and\s+$/.test(tok)) { parts.push(cur); cur = ''; }
+      else cur += tok;
+    }
+    parts.push(cur);
+    return parts.map((x) => x.trim()).filter(Boolean);
+  }
+
+  const initials = (first) => first.split(/\s+/).filter(Boolean)
+    .map((w) => w.split('-').filter(Boolean).map((x) => x[0] + '.').join('-')).join(' ');
+
+  // "Dorn, Stanna K." -> { shown: "Dorn, S. K.", ours: true }
+  function author(raw, members) {
+    if (/^\{[^{}]*\}$/.test(raw)) {
+      if (!raw.includes(',')) {                  // a consortium, kept whole and matched on its full name
+        const whole = tex(raw);
+        return { shown: whole, ours: members.has(whole.toLowerCase()) };
+      }
+      raw = raw.slice(1, -1);                    // a person typed into Zotero's single name box
+    }
+    const bits = raw.split(',').map(tex);
+    let last, first, jr = '';
+    if (bits.length === 1) { const w = bits[0].split(' '); last = w.pop(); first = w.join(' '); }
+    else if (bits.length === 2) [last, first] = bits;
+    else [last, jr, first] = bits;                                           // "Jacobs, Jr, William R"
+    const ini = initials(first);
+    return {
+      shown: last + (ini ? ', ' + ini : '') + (jr ? ', ' + jr.replace(/\.$/, '') + '.' : ''),
+      ours: members.has(last.toLowerCase() + '|' + ini.slice(0, 1).toLowerCase()),
+    };
+  }
+
+  // extras.txt: extra buttons for a paper, matched on its DOI.
+  //   DOI / Link / Label lines, entries separated by a blank line.
+  const doiKey = (x) => (x || '').trim().toLowerCase().replace(/^(https?:\/\/)?(dx\.)?doi\.org\//, '').replace(/^doi:\s*/, '');
+  const safeUrl = (u) => /^(https?:\/\/|mailto:|\.{0,2}\/|[\w%-]+[\/.])/i.test(u) && !/^\s*javascript:/i.test(u);
+  function parseExtras(text) {
+    const byDoi = new Map();
+    let e = null;
+    const keep = () => {
+      if (!e || !e.doi || !e.link || !e.label || !safeUrl(e.link)) return;
+      const k = doiKey(e.doi);
+      if (!byDoi.has(k)) byDoi.set(k, []);
+      byDoi.get(k).push(e);
+    };
+    for (const line of text.split(/\r?\n/)) {
+      if (/^\s*#/.test(line)) continue;
+      const m = /^\s*(doi|link|url|label)\s*:\s*(.*)$/i.exec(line);
+      if (!m) continue;
+      const field = m[1].toLowerCase() === 'url' ? 'link' : m[1].toLowerCase();
+      if (field === 'doi') { keep(); e = {}; }          // each DOI: line starts a new entry
+      if (e) e[field] = m[2].trim();
+    }
+    keep();
+    return byDoi;
+  }
+  let extras = new Map();
+
+  // TOC.txt: a paper's graphical abstract, matched on its DOI.
+  //   DOI / TOC lines; the image itself lives in the TOCs folder.
+  const TOC_DIR = 'TOCs/';
+  function parseToc(text) {
+    const byDoi = new Map();
+    let doi = null;
+    for (const line of text.split(/\r?\n/)) {
+      if (/^\s*#/.test(line)) continue;
+      const m = /^\s*(doi|toc(?:\s*file\s*name)?|file\s*name|file)\s*:\s*(.*)$/i.exec(line);
+      if (!m) continue;
+      const value = m[2].trim();
+      if (/^doi$/i.test(m[1])) doi = doiKey(value);
+      // a bare file name only - nothing that could point outside the TOCs folder
+      else if (doi && value && !/[\\/]|\.\./.test(value) && !byDoi.has(doi)) byDoi.set(doi, value);
+    }
+    return byDoi;
+  }
+  let tocs = new Map();
+
+  function linkFor(d) {
+    if (d.doi) return 'https://doi.org/' + d.doi.trim();
+    const m = /\\url\{([^}]+)\}/.exec(d.note || '');
+    return d.url || (m ? m[1] : '');
+  }
+
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const icon = (w, h, path, cls) => {
+    const s = document.createElementNS(SVGNS, 'svg');
+    s.setAttribute('width', w); s.setAttribute('height', h);
+    s.setAttribute('viewBox', '0 0 ' + w + ' ' + h); s.setAttribute('fill', 'none');
+    s.setAttribute('aria-hidden', 'true');
+    if (cls) s.setAttribute('class', cls);
+    const p = document.createElementNS(SVGNS, 'path');
+    p.setAttribute('d', path); p.setAttribute('stroke', 'currentColor');
+    p.setAttribute('stroke-width', '1.7'); p.setAttribute('stroke-linecap', 'round');
+    p.setAttribute('stroke-linejoin', 'round');
+    s.appendChild(p);
+    return s;
+  };
+
+  function paper(d, members) {
+    const li = el('li', 'pub');
+    const n = el('span', 'pub-n', d.n); n.setAttribute('aria-hidden', 'true');
+    const body = el('div');
+    const title = tex(d.title || ''), url = linkFor(d);
+
+    const h = el('h3', 'pub-title');
+    if (url) { const a = el('a', '', title); a.href = url; h.appendChild(a); } else h.textContent = title;
+
+    const who = el('p', 'pub-authors');
+    const names = (list) => list.forEach((raw, i) => {
+      if (i) who.append('; ');
+      const a = author(raw, members);
+      who.append(a.ours ? el('strong', '', a.shown) : a.shown);
+    });
+    // Zotero's "Contributor" (exported as collaborator) normally joins the author list.
+    // In Organic Syntheses those people are the checkers: "...; checked by A; B".
+    const orgSyn = /org(anic|\.)?\s*synth/i.test(d.journal || '');
+    const extra = [d.collaborator, d.contributor].flatMap((f) => splitAuthors(f || ''));
+    names(splitAuthors(d.author || '').concat(orgSyn ? [] : extra));
+    const checkers = splitAuthors(d.checked || d.checkedby || d['checked-by'] || d.checked_by || '')
+      .concat(orgSyn ? extra : []);
+    if (checkers.length) {
+      who.append('; checked by ');
+      names(checkers);
+    }
+
+    const ref = el('p', 'pub-ref');
+    ref.append(el('i', '', tex(d.journal || d.booktitle || '')), ' ', el('b', '', d.year || ''));
+    if (d.volume) ref.append(', ', el('i', '', tex(d.volume)));
+    if (d.pages) ref.append(', ' + tex(d.pages));
+    ref.append('.');
+    if (d.doi) {
+      const doi = el('a', 'pub-doi', d.doi.trim());
+      doi.href = 'https://doi.org/' + d.doi.trim();
+      ref.append(' DOI: ', doi);
+    }
+
+    body.append(h, who, ref);
+    const toc = tocs.get(doiKey(d.doi));
+    if (toc) {
+      const img = el('img', 'pub-toc');
+      img.src = DIR + TOC_DIR + encodeURIComponent(toc);
+      img.alt = 'Graphical abstract: ' + title;
+      img.loading = 'lazy'; img.decoding = 'async';
+      img.addEventListener('error', () => img.remove());   // named in TOC.txt but not in the folder
+      body.appendChild(img);
+    }
+    li.append(n, body);
+    const links = el('div', 'pub-links');
+    const button = (label, href, says) => {
+      const a = el('a', 'pub-link tag', label + ' ');
+      a.href = href; a.setAttribute('aria-label', title + ' - ' + says);
+      a.appendChild(icon(9, 9, 'M1.5 7.5 7.5 1.5M7.5 1.5H3M7.5 1.5V6'));
+      links.appendChild(a);
+    };
+    if (url) button(acronym(d.journal || d.booktitle) || 'Link', url, 'open the article');
+    (extras.get(doiKey(d.doi)) || []).forEach((x) => button(x.label, x.link, x.label));
+    if (links.children.length) li.appendChild(links);
+    return li;
+  }
+
+  function section(heading, papers, open, members) {
+    const det = el('details', 'pubyear'); det.open = open;
+    const sum = el('summary');
+    sum.append(el('span', 'pubyear-label display-sm', heading),
+               el('span', 'pubyear-count datum', papers.length + ' publication' + (papers.length === 1 ? '' : 's')),
+               icon(16, 10, 'M1.5 1.5 8 8l6.5-6.5', 'pubyear-chev'));
+    det.appendChild(sum);
+    if (papers.length) {
+      const ol = el('ol', 'pubs'); ol.setAttribute('role', 'list');
+      papers.forEach((d) => ol.appendChild(paper(d, members)));
+      det.appendChild(ol);
+    } else det.appendChild(el('p', 'pubs pubs-empty datum', 'Nothing listed yet.'));
+    return det;
+  }
+
+  // null when the file is not there (a host that answers a missing file with its
+  // own HTML page is treated the same way)
+  async function grab(name) {
+    try {
+      const res = await fetch(DIR + name, { cache: 'no-cache' });
+      if (!res.ok || /text\/html/i.test(res.headers.get('content-type') || '')) return null;
+      return await res.text();
+    } catch (err) { return null; }
+  }
+
+  // [year, month, day, key] from year/month/day fields, or from a biblatex date = {2026-02-14}
+  const sortKey = (d) => {
+    const iso = /^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?/.exec(d.date || '') || [];
+    const mon = (d.month || '').toLowerCase();
+    return [parseInt(d.year || iso[1], 10) || 0,
+            MONTHS.indexOf(mon.slice(0, 3)) + 1 || parseInt(mon, 10) || parseInt(iso[2], 10) || 0,
+            parseInt(d.day || iso[3], 10) || 0, d.key];
+  };
+  const byDate = (a, b) => { const x = sortKey(a), y = sortKey(b);
+    return x[0] - y[0] || x[1] - y[1] || x[2] - y[2] || (x[3] < y[3] ? -1 : x[3] > y[3] ? 1 : 0); };
+
+  (async () => {
+    const years = [];
+    for (let y = FIRST_YEAR; y <= LAST_YEAR; y++) years.push(String(y));
+    const [roster, more, tocList, prior, ...byYear] = await Promise.all(
+      [grab('group_members.txt'), grab('extras.txt'), grab('TOC.txt'), grab('prior_uvm.bib'), ...years.map((y) => grab(y + '.bib'))]);
+    extras = parseExtras(more || '');
+    tocs = parseToc(tocList || '');
+
+    // "Stanna Dorn" -> "dorn|s"
+    const members = new Set();
+    (roster || '').split(/\r?\n/).forEach((line) => {
+      const w = line.replace(/#.*/, '').trim().split(/\s+/).filter(Boolean);
+      if (w.length >= 2) members.add(w[w.length - 1].toLowerCase() + '|' + w[0][0].toLowerCase());
+      if (w.length) members.add(w.join(' ').toLowerCase());          // full name, for consortia
+    });
+
+    const groups = [];
+    if (prior !== null) groups.push({ heading: 'Prior to UVM', papers: parseBib(prior) });
+    years.forEach((y, i) => { if (byYear[i] !== null) groups.push({ heading: y, papers: parseBib(byYear[i]) }); });
+    // One running number across every file, handed out by publication date alone:
+    // the oldest paper is 1 and the count carries straight on from one year to the next.
+    groups.flatMap((g) => g.papers).sort(byDate).forEach((d, i) => { d.n = i + 1; });
+    groups.forEach((g) => g.papers.sort((a, b) => a.n - b.n));
+
+    root.textContent = '';
+    if (!groups.length) {
+      root.appendChild(el('p', 'pubs-empty datum', location.protocol === 'file:'
+        ? 'Open this page through the site (not as a file) to see the list.'
+        : 'Publications will be listed here.'));
+      return;
+    }
+    // shown newest first; the top heading starts open
+    groups.reverse().forEach((g, i) => root.appendChild(section(g.heading, g.papers.slice().reverse(), i === 0, members)));
+
+    // search: every word typed must appear somewhere in a paper's title, authors or citation
+    const box = document.getElementById('pub-search');
+    const status = document.getElementById('pubs-status');
+    if (!box) return;
+    const plain = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const sections = Array.from(root.querySelectorAll('details')).map((det) => ({
+      det, wasOpen: det.open,
+      count: det.querySelector('.pubyear-count'), total: det.querySelector('.pubyear-count').textContent,
+      rows: Array.from(det.querySelectorAll('.pub')).map((li) => ({ li, text: plain(li.textContent) })),
+    }));
+    const filter = () => {
+      const words = plain(box.value).split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const sec of sections) {
+        let hits = 0;
+        for (const row of sec.rows) {
+          const hit = words.every((w) => row.text.includes(w));
+          row.li.hidden = !hit;
+          hits += hit;
+        }
+        shown += hits;
+        sec.det.hidden = words.length > 0 && hits === 0;
+        sec.det.open = words.length ? hits > 0 : sec.wasOpen;      // matches open up; clearing puts things back
+        sec.count.textContent = words.length ? hits + ' of ' + sec.rows.length : sec.total;
+      }
+      status.hidden = !(words.length && shown === 0);
+      status.textContent = status.hidden ? '' : 'No publications match "' + box.value.trim() + '".';
+    };
+    box.addEventListener('input', filter);
+    if (box.value) filter();
+  })();
+})();
+</script>
+</body>
+</html>

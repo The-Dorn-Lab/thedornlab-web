@@ -1,0 +1,18 @@
+# Dorn Lab bio file. Field guide and how to rebuild the page: assets/bios/README.md
+
+Name:           Miles Ottinger
+Role:           Undergraduate Researcher
+Title:
+Joined:         March 2026
+Headshot:       2026_MO_Undergrad_Headshot.jpeg
+Email:
+Fellowship:
+Education:
+Class Year:     2029
+CV:
+ORCID:
+LinkedIn:
+Google Scholar:
+
+Bio:
+Miles is a sophomore majoring in chemistry from Philadelphia, Pennsylvania. He’s excited to develop his skills in organic chemistry working in the Dorn lab. He hopes to explore total synthesis projects to further his understanding of laboratory techniques. Outside of the lab, he enjoys rock climbing and spending quality time with his friends.

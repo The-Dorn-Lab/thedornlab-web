@@ -1,0 +1,19 @@
+# Dorn Lab bio file. Field guide and how to rebuild the page: assets/bios/README.md
+# The positions & education list on the PI card is edited directly in thegroup.html.
+
+Name:           Stanna Dorn
+Role:           Principal Investigator
+Title:          Assistant Professor of Chemistry
+Joined:
+Headshot:       2026_SKD_Headshot.jpg
+Email:          skdorn [at] uvm.edu
+Fellowship:
+Education:
+Class Year:
+CV:             SKDorn_ChemistryCV_11.44_UVM.pdf
+ORCID:          https://orcid.org/0000-0002-8644-9962
+LinkedIn:       https://www.linkedin.com/in/stanna-dorn/
+Google Scholar: https://scholar.google.com/citations?user=YkVUapkAAAAJ&hl=en
+
+Bio:
+Stanna was born and raised in rural northern Michigan, near Grayling. She obtained a BS in Chemistry and a BA in music at Hope College, where she performed organometallic research with Prof. Jeffrey B. Johnson. After a summer research experience in Prof. John Montgomery’s group at the University of Michigan, Stanna pursued her doctoral studies with Prof. M. Kevin Brown at Indiana University-Bloomington. Here, she developed cooperative catalysis methods for alkene carboboration, predominantly with copper and palladium. After receiving her PhD, Stanna worked as an NIH F32 and NIH K99/R00 postdoctoral fellow in Prof. Sarah Reisman’s lab at Caltech, where she gained synthetic and photochemical methodology experience. Currently, Stanna is an Assistant Professor at the University of Vermont, where she leads a research group focused on organic methodology and synthetic applications of boron- and nitrogen-containing compounds. Outside of the lab, Stanna enjoys playing the flute, participating in team sports, and finding the perfect bench for reading.

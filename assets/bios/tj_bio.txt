@@ -1,0 +1,17 @@
+# Dorn Lab bio file. Field guide and how to rebuild the page: assets/bios/README.md
+
+Name:           TJ Walsh
+Role:           Undergraduate Researcher
+Joined:         June 2026
+Headshot:       2026_TJW_Undergrad_Headshot.png
+Email:
+Fellowship:
+Education:
+Class Year:     2028
+CV:
+ORCID:
+LinkedIn:
+Google Scholar:
+
+Bio:
+TJ is a junior majoring in chemistry from Princeton, NJ. He is determined to improve his laboratory-based chemistry skills and learn more about organic synthesis theory. He is excited to dive deeper into his interest in organic chemistry in the Dorn lab. Outside of the lab he is an avid musician and skier, often making music with his friends and skiing the Vermont mountains on the weekends.

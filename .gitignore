@@ -1,0 +1,43 @@
+# ---- kept on the computer, never uploaded --------------------------------------
+
+# Local screenshot tool and its output
+screenshot.mjs
+temporary screenshots/
+
+# Captures of other labs' websites, kept for design reference
+inspiration/
+
+# Markdown notes - only the README files belong in the repository
+*.md
+!README.md
+
+# Source text for the site's wording
+dorn_text_*
+
+# Source files behind the artwork: the working files for each research scheme
+# (Illustrator, ChemDraw, the unedited exports) and the logo exports no page uses.
+# The finished scheme (assets/research_schemes/scheme1.svg) and the logo and icon
+# the pages show are uploaded as normal.
+assets/research_schemes/*/
+*.ai
+*.cdxml
+*.psd
+assets/dornlab_icon.png
+assets/dornlab_logo.png
+assets/dornlab_icon_outlined_opaque.svg
+assets/dornlab_icon_outlined_thick_translucent.svg
+
+# ---- generated or machine-specific ---------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+_site/
+
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~

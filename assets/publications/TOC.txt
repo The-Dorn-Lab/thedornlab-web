@@ -1,0 +1,17 @@
+# Graphical abstracts (TOC graphics) for the Publications page.
+#
+# Each entry puts one image directly under a paper's citation. The paper is found by its
+# DOI, wherever it sits in the .bib files in this folder. Save, refresh the page - done.
+#
+#   DOI:  the paper's DOI, as in its .bib entry (a full https://doi.org/... link works too)
+#   TOC:  the image's file name, exactly as it is saved in the TOCs folder next to this
+#         file - including capitals and the ending (.png, .jpg, .gif, .webp, .svg)
+#
+# Start every entry with its DOI: line. Lines starting with "#" are notes.
+# An entry whose DOI matches no paper, or whose file is not in the TOCs folder, is ignored.
+#
+# Example (remove the "# " to use it):
+#
+# DOI:  10.1002/anie.202103435
+# TOC:  dorn2021_modular.png
+

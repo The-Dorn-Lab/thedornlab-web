@@ -1,0 +1,21 @@
+# Dorn Lab bio file. Field guide and how to rebuild the page: assets/bios/README.md
+
+Name:           Jake Sirlin
+Role:           Postdoctoral Researcher
+Title:
+Joined:         August 31, 2026
+Headshot:       2026_JTS_Postdoc_Headshot.jpg
+Headshot Focus: 60% 50%
+Card Shift:     5%
+Email:          jsirlin [at] uvm.edu
+Fellowship:
+Education:      Ph.D. University of North Carolina at Chapel Hill (Alex Miller)
+Education:      B.S. University of Miami (Carl Hoff)
+Class Year:
+CV:
+ORCID:          https://orcid.org/0000-0003-3047-5667
+LinkedIn:       https://www.linkedin.com/in/jakesirlin/
+Google Scholar:
+
+Bio:
+Jake started his journey as a chemist in his backyard after primary school, exploring acid-base reactions involving purple cabbage juice. After a few years of accredited parental review, they began their independent research career. Jake obtained their B.S. in chemistry and economics from the University of Miami, where they researched tin hyponitrite complexes under Prof. Carl Hoff. Jake earned their Ph.D. From the University of North Carolina at Chapel Hill under the direction of Professor Alex Miller, where they studied the mechanism of CO reduction by ruthenium complexes and their reactive intermediates. During their time at UNC, Jake co-chaired the 2024 Electron Donor-Acceptor Interactions Gordon Research Seminar. They also founded the Joint Wellness Team at UNC-Chapel Hill, which works to secure mental health resources for students and researchers in the chemistry department. Jake joined the Dorn Lab as a postdoctoral researcher in 2026, spending his time in the lab working on methodological development of synthetic routes to boron-containing heterocycles. Outside of the lab, Jake enjoys climbing, cuddling with his two cats Ori and Fermi, and playing Dungeons and Dragons with his fiancée Willow.

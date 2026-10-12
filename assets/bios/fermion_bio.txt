@@ -1,0 +1,17 @@
+# MOCK FILE - delete this file (and assets/headshots/MOCK_Pet_Headshot.jpg), then run python build_team.py
+
+Name:           Fermion
+Role:           Lab Mascot
+Joined:         April 2021
+Headshot:       Fermi_Headshot.jpeg
+Email:
+Fellowship:     Quantum Cat Fellow (2021-Present)
+Education:
+Class Year:
+CV:
+ORCID:
+LinkedIn:
+Google Scholar:
+
+Bio:
+Fermion (or Fermi to his associates) is Jake's cat. He has a ground-state spin state of 1/2, cannot sit still for more than 30 seconds (except for pets) and collapses into a cuddle pile when observed. He greatly enjoys tormenting his brother with a seemingly endless stream of love and affection. He also loves being held like a baby, because he knows he is one.
