@@ -4,7 +4,7 @@
 # not this list, which is replaced each time the script runs.
 
 Jake Sirlin
-Science Education Alliance Phage Hunters Advancing Genomics and Evolutionary Science
+Science Education Alliance Phage Hunters Advancing Genomics and Evolutionary Science (SEA-PHAGES, Group Author)
 Miles Ottinger
 Stanna Dorn
 TJ Walsh

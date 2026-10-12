@@ -664,11 +664,16 @@ if (reduce) {
   // "Dorn, Stanna K." -> { shown: "Dorn, S. K.", ours: true }
   function author(raw, members) {
     if (/^\{[^{}]*\}$/.test(raw)) {
-      if (!raw.includes(',')) {                  // a consortium, kept whole and matched on its full name
+      // A braced name is a person only if it reads "Surname, Given": a comma after at most
+      // three words, and no brackets. Anything else is a consortium - kept whole (commas
+      // and all, e.g. "... (SEA-PHAGES, Group Author)") and matched on its full name.
+      const inner = raw.slice(1, -1);
+      const person = inner.includes(',') && !/[()]/.test(inner) && inner.split(',')[0].trim().split(/\s+/).length <= 3;
+      if (!person) {
         const whole = tex(raw);
         return { shown: whole, ours: members.has(whole.toLowerCase()) };
       }
-      raw = raw.slice(1, -1);                    // a person typed into Zotero's single name box
+      raw = inner;                               // a person typed into Zotero's single name box
     }
     const bits = raw.split(',').map(tex);
     let last, first, jr = '';

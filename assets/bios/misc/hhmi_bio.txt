@@ -19,7 +19,7 @@
 #   Grads:     the predoctoral degree.
 #   Undergrads: leave Education blank and fill in Class Year instead.
 
-Name: Science Education Alliance Phage Hunters Advancing Genomics and Evolutionary Science 
+Name: Science Education Alliance Phage Hunters Advancing Genomics and Evolutionary Science (SEA-PHAGES, Group Author)
 Role:
 Title:
 Joined:
