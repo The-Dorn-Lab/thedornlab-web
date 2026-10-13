@@ -408,11 +408,13 @@ main > section:last-of-type{padding-bottom:var(--s2);}
     <figure class="reveal mt-[var(--s5)] mb-[var(--s8)] mx-auto max-w-[900px]">
       <div class="portrait groupshot" id="groupshot" tabindex="0" role="img"
            aria-label="The Dorn Lab group standing on the steps of a columned brick building on the UVM campus">
-        <img class="is-on" src="assets/group_photos/web/landscape_20260915.jpg" alt="" decoding="async" style="object-position:50% 86%">
-        <img data-silly src="assets/group_photos/web/silly_20260915.jpg" alt="" loading="lazy" decoding="async">
-        <img data-silly src="assets/group_photos/web/silly1_20260915.jpg" alt="" loading="lazy" decoding="async">
+        <!-- zoom: "scale" is how far each photo is enlarged, "transform-origin" the point it grows from
+             (where the people are). The frame keeps its size and crops whatever falls outside. -->
+        <img class="is-on" src="assets/group_photos/web/landscape_20260915.jpg" alt="" decoding="async" style="object-position:50% 86%;transform:translateY(3.95%) scale(1.6);transform-origin:47.5% 100%">
+        <img data-silly src="assets/group_photos/web/silly_20260915.jpg" alt="" loading="lazy" decoding="async" style="transform:translateX(8.89%) scale(1.5);transform-origin:53% 53%">
+        <img data-silly src="assets/group_photos/web/silly1_20260915.jpg" alt="" loading="lazy" decoding="async" style="transform:scale(1.3);transform-origin:49.5% 51%">
       </div>
-      <figcaption class="datum mt-[var(--s3)]" style="color:var(--ink-faint)">The group, September 2026</figcaption>
+      <figcaption class="datum mt-[var(--s3)]" style="color:var(--ink-faint)">The Dorn Lab, September 2026</figcaption>
     </figure>
 
     <div class="flex flex-wrap items-end justify-between gap-[var(--s5)]">
@@ -560,9 +562,11 @@ window.addEventListener('scroll', onScroll, { passive: true });
   shot.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') goPosed(); });
   shot.addEventListener('focus', goSilly);
   shot.addEventListener('blur', goPosed);
-  // no hover on a touch screen: a tap flips it, the next tap flips it back
+  // A click brings back the normal group photo; it stays until the pointer leaves and
+  // returns. On a touch screen there is no hover, so a tap flips it and the next tap
+  // flips it back.
   shot.addEventListener('click', (e) => {
-    if (window.matchMedia('(hover: hover)').matches) return;
+    if (window.matchMedia('(hover: hover)').matches) return goPosed();
     posed.classList.contains('is-on') ? goSilly() : goPosed();
   });
 })();
