@@ -4,6 +4,7 @@ Name:           Ori
 Role:           Lab Mascot
 Joined:         January 2020
 Headshot:       Ori_Headshot.jpeg
+Headshot Focus: 7% 50%
 Email:
 Fellowship:     Best Boy Scholar (2020-Present)
 Education:
