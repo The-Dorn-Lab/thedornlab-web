@@ -27,6 +27,9 @@ assets/dornlab_logo.png
 assets/dornlab_icon_outlined_opaque.svg
 assets/dornlab_icon_outlined_thick_translucent.svg
 
+# Earlier group photos, before they were reformatted for the landing page
+assets/group_photos/originals/
+
 # ---- generated or machine-specific ---------------------------------------------
 __pycache__/
 *.pyc

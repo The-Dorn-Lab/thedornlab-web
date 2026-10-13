@@ -33,7 +33,7 @@ PAGE = os.path.join(ROOT, 'thegroup.html')
 ROSTER = os.path.join(ROOT, 'assets', 'publications', 'group_members.txt')
 GROUP = os.path.join(ROOT, 'assets', 'group_photos')
 GROUP_WEB = os.path.join(GROUP, 'web')
-GROUP_WIDTH = 2400      # px; the landing page shows the photo 900 px wide, zoomed in up to 1.6x, on screens up to 2x
+GROUP_WIDTH = 1800      # px; the landing page shows the photo 900 px wide, on screens up to 2x
 NL = '\n'
 e = html.escape
 

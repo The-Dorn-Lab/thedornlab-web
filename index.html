@@ -307,14 +307,13 @@ main > section:last-of-type{padding-bottom:var(--s2);}
 ::selection{background:var(--gold);color:var(--catamount);}
 /* The posed shot shows by default; pointing at it (or focusing / tapping it) swaps in
    one of the outtakes. All three sit stacked and cross-fade - opacity only. */
-.groupshot{aspect-ratio:4/3;cursor:pointer;
+.groupshot{aspect-ratio:16/9;cursor:pointer;      /* the photos are 16:9, so nothing is cropped */
   box-shadow:0 1px 2px rgba(21,71,52,.06), 0 18px 40px -22px rgba(0,49,60,.38);}
-.groupshot img{position:absolute;inset:0;object-position:50% 58%;opacity:0;
+.groupshot img{position:absolute;inset:0;opacity:0;
   transition:opacity .6s var(--ease);}
 .groupshot img.is-on{opacity:1;}
 .groupshot:focus-visible{outline:2px solid var(--catamount);outline-offset:4px;}
 .groupshot:active{transform:scale(.995);}
-@media (min-width:768px){.groupshot{aspect-ratio:16/9;}}
 @media (prefers-reduced-motion:reduce){.groupshot img{transition:none;}}
 /* category label on a news row (rows are drawn by assets/news.js) */
 .news-cat{align-self:start;justify-self:start;}
@@ -408,11 +407,9 @@ main > section:last-of-type{padding-bottom:var(--s2);}
     <figure class="reveal mt-[var(--s5)] mb-[var(--s8)] mx-auto max-w-[900px]">
       <div class="portrait groupshot" id="groupshot" tabindex="0" role="img"
            aria-label="The Dorn Lab group standing on the steps of a columned brick building on the UVM campus">
-        <!-- zoom: "scale" is how far each photo is enlarged, "transform-origin" the point it grows from
-             (where the people are). The frame keeps its size and crops whatever falls outside. -->
-        <img class="is-on" src="assets/group_photos/web/landscape_20260915.jpg" alt="" decoding="async" style="object-position:50% 86%;transform:translateY(3.95%) scale(1.6);transform-origin:47.5% 100%">
-        <img data-silly src="assets/group_photos/web/silly_20260915.jpg" alt="" loading="lazy" decoding="async" style="transform:translateX(8.89%) scale(1.5);transform-origin:53% 53%">
-        <img data-silly src="assets/group_photos/web/silly1_20260915.jpg" alt="" loading="lazy" decoding="async" style="transform:scale(1.3);transform-origin:49.5% 51%">
+        <img class="is-on" src="assets/group_photos/web/group_photo.jpg" alt="" decoding="async">
+        <img data-silly src="assets/group_photos/web/fun_group_photo.jpg" alt="" loading="lazy" decoding="async">
+        <img data-silly src="assets/group_photos/web/fun_group_photo_1.jpg" alt="" loading="lazy" decoding="async">
       </div>
       <figcaption class="datum mt-[var(--s3)]" style="color:var(--ink-faint)">The Dorn Lab, September 2026</figcaption>
     </figure>
