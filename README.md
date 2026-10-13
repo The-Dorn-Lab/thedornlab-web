@@ -28,6 +28,8 @@ File names are case-sensitive on the live site: `Headshot.JPG` and `headshot.jpg
 
 - **Search engines** get a `sitemap.xml` and `robots.txt`, written by `build_sitemap.py` on every deployment. A new page is listed automatically. Each page's description for search results is the `<meta name="description">` line near the top of its `.html` file.
 
+- **Styles** are compiled by `build_css.py` on every deployment. The pages in the repository load Tailwind's in-browser script, which is meant for development; the published copies get one small stylesheet (`assets/tailwind.css`) instead. The colours and fonts are still set in the `tailwind.config` block at the top of each page, which must be the same on every page.
+
 If a deployment fails, open the failed run under the repository's **Actions** tab and read its log: `build_team.py` stops with a plain message when a bio has a problem, for example a headshot file name that does not exist.
 
 ## Working on the site locally

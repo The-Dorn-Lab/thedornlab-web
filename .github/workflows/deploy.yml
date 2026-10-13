@@ -50,6 +50,11 @@ jobs:
           find _site/assets/headshots _site/assets/group_photos -maxdepth 1 -type f -delete
           touch _site/.nojekyll
 
+      # The pages in the repository load Tailwind's in-browser script, which is for
+      # development only; the published copies get one small compiled stylesheet instead.
+      - name: Compile the Tailwind styles
+        run: python build_css.py _site
+
       - name: Write sitemap.xml and robots.txt for search engines
         run: python build_sitemap.py _site
 
