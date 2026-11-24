@@ -13,6 +13,11 @@
 # Start every entry with its Date: line. The order in this file does not matter; when two
 # entries share a date, the one written first is shown first. Lines starting with "#" are notes.
 
+Date: Nov 2026 
+Title: Dorn Lab Recieves UVM OVPR EXPRESS grant!
+Content: The UVM OVPR EXPRESS grant is an internal, competitive funding program designed to stimulate research and scholarship by new early-career faculty members. We're grateful to the UVM OVPR for the support!
+Category: Grants and Fellowships
+
 Date: Sept 2026
 Title: Undergraduates Miles and TJ join the Dorn Lab
 Content: We’re excited to welcome UVM undergrads Miles and TJ to the group!
