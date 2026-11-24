@@ -65,7 +65,7 @@
     body.appendChild(h);
     if (x.content) {
       const p = el('p', '', x.content);
-      p.style.cssText = 'margin-top:4px;max-width:86ch;font-size:16px;line-height:1.7;color:var(--ink-soft)';
+      p.style.cssText = 'margin-top:4px;max-width:86ch;font-size:16px;line-height:1.7;color:var(--ink-soft);text-align:justify';
       body.appendChild(p);
     }
     art.append(date, body);
