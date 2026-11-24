@@ -14,7 +14,7 @@
 # entries share a date, the one written first is shown first. Lines starting with "#" are notes.
 
 Date: Nov 2026 
-Title: Dorn Lab Recieves UVM OVPR EXPRESS grant!
+Title: Dorn Lab Recieves UVM OVPR EXPRESS Grant!
 Content: The UVM OVPR EXPRESS grant is an internal, competitive funding program designed to stimulate research and scholarship by new early-career faculty members. We're grateful to the UVM OVPR for the support!
 Category: Grants and Fellowships
 
