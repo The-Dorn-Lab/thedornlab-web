@@ -326,6 +326,8 @@ html:has(dialog.drawer[open]){overflow:hidden;}
   background:linear-gradient(to top, rgba(6,27,20,.58), rgba(6,27,20,0) 40%);}
 .portrait .tone{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
   background:linear-gradient(150deg, rgba(21,71,52,.18), rgba(0,49,60,.08));}
+/* the PI's photo: a lighter shade along the bottom */
+.person > .portrait::after{background:linear-gradient(to top, rgba(6,27,20,.24), rgba(6,27,20,0) 30%);}
 /* colophon: the (c) scaled to the cap height of the text beside it */
 .copy-mark{font-size:1.32em;line-height:0;}
 .colophon-link{color:inherit;text-decoration:none;border-bottom:1px solid transparent;
